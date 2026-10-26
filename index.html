@@ -14,9 +14,11 @@
   <title>Yuanjing Zhao — Engineering carbon’s next chapter</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/methanol-vision.css">
   <script src="js/content.js" defer></script>
   <script src="js/visualisations.js" defer></script>
   <script src="js/app.js" defer></script>
+  <script src="js/methanol-vision.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -27,14 +29,50 @@
       <nav class="desktop-nav" aria-label="Main navigation"><a href="#research">Research</a><a href="#playground">Playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a></nav>
       <div class="header-actions"><button class="command-trigger" id="command-trigger" title="Find a section (Command or Control + K)" aria-label="Open command menu"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="4.8"/><path d="m12 12 4.5 4.5"/></svg><kbd>⌘ K</kbd></button><button class="icon-button theme-toggle" id="theme-toggle" aria-label="Switch to dusk theme" title="Switch theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 13a8.7 8.7 0 0 1-9.7-9.7A8.8 8.8 0 1 0 20.7 13Z"/></svg></button><a href="#contact" class="contact-nav">Let’s talk <span aria-hidden="true">↗</span></a><button class="menu-toggle icon-button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button></div>
     </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#research">Research</a><a href="#playground">Interactive playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a><a href="#sustainability">Sustainable development goals</a><a href="#contact">Contact</a></nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#methanol-vision">Green methanol system</a><a href="#research">Research</a><a href="#playground">Interactive playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a><a href="#sustainability">Sustainable development goals</a><a href="#contact">Contact</a></nav>
   </header>
   <main id="main">
     <section class="hero wrap" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy"><div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> CHEMICAL ENGINEERING · SYSTEMS THINKING</div><h1 id="hero-title">Engineering<br>carbon’s<br><em>next chapter.</em></h1><p class="hero-intro">I’m Yuanjing (Jason) Zhao, a PhD researcher working on sustainable energy systems, CO₂ capture and utilisation, and process systems engineering.</p><div class="hero-ctas"><a class="button button-primary" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-link" href="#about">A little about me <span aria-hidden="true">↓</span></a></div><div class="affiliation"><span class="affiliation-symbol" aria-hidden="true">✳</span><span>PhD researcher<br><strong>University of Surrey, UK</strong></span></div></div>
+      <div class="hero-copy"><div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> CHEMICAL ENGINEERING · SYSTEMS THINKING</div><h1 id="hero-title">Engineering<br>carbon’s<br><em>next chapter.</em></h1><p class="hero-intro">I’m Yuanjing (Jason) Zhao, a PhD researcher working on sustainable energy systems, CO₂ capture and utilisation, and process systems engineering.</p><div class="hero-ctas"><a class="button button-primary" href="#research">Explore my research <span aria-hidden="true">↗</span></a><a class="text-link" href="#methanol-vision">Explore the system <span aria-hidden="true">↓</span></a></div><div class="affiliation"><span class="affiliation-symbol" aria-hidden="true">✳</span><span>PhD researcher<br><strong>University of Surrey, UK</strong></span></div></div>
       <div class="molecule-panel"><div class="scene-top"><span class="micro">A STUDY IN CONNECTIONS</span><button class="scene-motion" id="motion-toggle" aria-pressed="false" aria-label="Pause animated molecule"><span class="pause-icon" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause motion</span></button></div><canvas id="molecule-canvas" aria-label="Interactive methanol molecule. Drag to rotate, or focus and use the arrow keys." tabindex="0"></canvas><div class="molecule-note note-one"><span class="tiny-cross">+</span> RENEWABLE ENERGY</div><div class="molecule-note note-two">C — O — H<span>SMALL MOLECULE. BIG POSSIBILITIES.</span></div><div class="scene-bottom"><div><span class="molecular-formula">CH<sub>3</sub>OH</span><p>A molecule.<br>A whole system.</p></div><div class="interaction-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M12 4v16m-8-8 3-3m-3 3 3 3m13-3-3-3m3 3-3 3M12 4l-3 3m3-3 3 3m-3 13-3-3m3 3 3-3"/></svg>DRAG TO ROTATE</div></div><span class="scene-index" aria-hidden="true">FIG. 01 — METHANOL / CONCEPTUAL GEOMETRY</span></div>
     </section>
     <div class="discipline-strip wrap" aria-label="Research themes"><div><span>01</span> Electrochemical systems</div><div><span>02</span> Low-carbon fuels</div><div><span>03</span> Interpretable AI</div><div><span>04</span> Process optimisation</div></div>
+    <section class="section wrap methanol-vision" id="methanol-vision" aria-labelledby="methanol-vision-title">
+      <div class="section-heading vision-heading"><div><div class="eyebrow section-index">SYSTEMS VISION / INTERACTIVE</div><h2 id="methanol-vision-title">A systems-level vision<br><em>for green methanol.</em></h2></div><p class="section-description">An AI-enabled, renewable-driven and carbon-capture-integrated green methanol economy.</p></div>
+      <figure class="vision-figure" aria-labelledby="methanol-vision-title vision-caption">
+        <div class="vision-toolbar"><p>Explore 13 connected modules.<br>Hover for a short explanation. Click to select.</p><button type="button" class="vision-motion-toggle" id="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
+        <p class="vision-mobile-hint">Swipe across the diagram, or choose a module below to read its explanation.</p>
+        <div class="vision-stage">
+          <div class="vision-map-scroll" tabindex="0" role="group" aria-label="Interactive green methanol systems figure; scroll horizontally on small screens">
+            <div class="vision-map" data-motion="playing">
+              <img src="assets/green-methanol-vision.png" alt="A renewable-driven green methanol system connecting wind and solar power, carbon capture and storage, electrolysis, hydrogen storage, methanol production, fuel cells, end-use demand and AI control." width="2520" height="1737" loading="lazy">
+              <svg class="vision-animation" viewBox="0 0 1000 689.286" aria-hidden="true" focusable="false">
+                <path class="vision-flow power" d="M660 88C638 143 616 185 585 224"/>
+                <path class="vision-flow power" d="M805 409C744 401 682 399 621 415"/>
+                <path class="vision-flow power" d="M520 460C439 481 356 529 281 586"/>
+                <path class="vision-flow carbon" d="M410 326C386 303 365 282 361 255"/>
+                <path class="vision-flow carbon" d="M390 248C431 243 473 240 511 238"/>
+                <path class="vision-flow carbon" d="M610 242C644 243 674 244 701 250"/>
+                <path class="vision-flow hydrogen" d="M257 589C326 606 395 628 466 637"/>
+                <path class="vision-flow hydrogen" d="M596 617C655 604 704 589 745 580"/>
+                <circle class="vision-energy-pulse" cx="350" cy="140" r="10"/>
+                <circle class="vision-energy-pulse second" cx="514" cy="102" r="10"/>
+                <circle class="vision-energy-pulse third" cx="668" cy="45" r="10"/>
+                <circle class="vision-ai-ring" cx="554" cy="416" r="36"/>
+                <polygon class="vision-solar-glint" points="785,371 919,417 875,447 738,403"/>
+              </svg>
+              <div class="vision-hotspots" role="group" aria-label="Explore system modules"></div>
+            </div>
+          </div>
+          <div class="vision-tooltip" id="vision-tooltip" role="tooltip" hidden><strong class="vision-tooltip-title"></strong><p class="vision-tooltip-text"></p></div>
+        </div>
+        <div class="vision-legend" aria-label="Animated connections"><span><i aria-hidden="true"></i>Power connections</span><span><i class="carbon" aria-hidden="true"></i>Carbon pathways</span><span><i class="hydrogen" aria-hidden="true"></i>Hydrogen pathways</span></div>
+        <div class="vision-detail" id="vision-detail" role="status" aria-live="polite" aria-atomic="true"><span class="vision-detail-number" aria-hidden="true">11</span><div><h3 id="vision-detail-title">AI control system</h3><p id="vision-detail-text">AI-assisted monitoring and optimisation coordinate electricity supply, carbon capture, hydrogen production, storage and end-use demand across the system.</p></div></div>
+        <div class="vision-modules" role="group" aria-label="Choose a module to keep its explanation open"></div>
+        <div class="vision-definitions sr-only"></div>
+        <figcaption class="vision-caption" id="vision-caption"><div class="vision-caption-title">A systems-level vision for an AI-enabled, renewable-driven and carbon-capture-integrated green methanol economy.</div><p>Animated flows illustrate system connections. Original figure supplied by Yuanjing Zhao.</p><p>Reference: Zhao et al. (2026). <em>From Thermal to Electrochemical CO₂-to-Methanol Conversion: A Comprehensive Review of Process Technologies, Techno-Economics, and Life-Cycle Performance.</em> Carbon Capture Science &amp; Technology.<br><a href="https://doi.org/10.1016/j.ccst.2026.100603" target="_blank" rel="noopener noreferrer">DOI: 10.1016/j.ccst.2026.100603 ↗</a></p></figcaption>
+      </figure>
+    </section>
     <section class="section wrap" id="research" aria-labelledby="research-title">
       <div class="section-heading"><div><div class="eyebrow section-index">01 / SELECTED RESEARCH</div><h2 id="research-title">From electrons<br>to <em>industrial decisions.</em></h2></div><p class="section-description">Working across scales: from electrochemical conversion to the performance of an entire production system.</p></div>
       <div class="research-grid">

@@ -155,6 +155,7 @@
 
   // Command palette: find content without having to scroll through the page.
   const commands=[
+    {label:'Explore the green methanol system',hint:'SYSTEMS VISION',keywords:'methanol systems vision ai renewable carbon capture interactive diagram',run:()=>goTo('methanol-vision')},
     {label:'Explore the research',hint:'SECTION 01',keywords:'research methanol electrochemistry',run:()=>goTo('research')},
     {label:'Open the interactive playground',hint:'SECTION 02',keywords:'playground demo interactive topsis pareto',run:()=>goTo('playground')},
     {label:'Browse all publications and manuscripts',hint:'SECTION 03',keywords:'papers publications articles writing under review conference',run:()=>goTo('publications')},
