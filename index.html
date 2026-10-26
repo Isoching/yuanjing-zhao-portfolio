@@ -13,14 +13,14 @@
   <meta name="robots" content="noindex,nofollow">
   <title>Yuanjing Zhao — Engineering carbon’s next chapter</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="css/styles.css?v=20261026-pathways-2">
-  <link rel="stylesheet" href="css/methanol-vision.css?v=20261026-pathways-2">
-  <link rel="stylesheet" href="css/process-pathways.css?v=20261026-pathways-2">
-  <script src="js/content.js?v=20261026-pathways-2" defer></script>
-  <script src="js/visualisations.js?v=20261026-pathways-2" defer></script>
-  <script src="js/app.js?v=20261026-pathways-2" defer></script>
-  <script src="js/methanol-vision.js?v=20261026-pathways-2" defer></script>
-  <script src="js/process-pathways.js?v=20261026-pathways-2" defer></script>
+  <link rel="stylesheet" href="css/styles.css?v=20261026-route-focus-1">
+  <link rel="stylesheet" href="css/methanol-vision.css?v=20261026-route-focus-1">
+  <link rel="stylesheet" href="css/process-pathways.css?v=20261026-route-focus-1">
+  <script src="js/content.js?v=20261026-route-focus-1" defer></script>
+  <script src="js/visualisations.js?v=20261026-route-focus-1" defer></script>
+  <script src="js/app.js?v=20261026-route-focus-1" defer></script>
+  <script src="js/methanol-vision.js?v=20261026-route-focus-1" defer></script>
+  <script src="js/process-pathways.js?v=20261026-route-focus-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -172,19 +172,17 @@
       <div class="research-profile-grid"><article><span class="eyebrow">RESEARCH INTERESTS</span><h3>From models to better processes.</h3><p>Sustainable energy systems, CO₂ capture and utilisation, and process systems engineering. Current focus lies in surrogate-based optimisation (SBO), digitalisation strategies, and multi-objective optimisation of complex, multi-physics renewable energy processes. Methodologies integrate first-principles modelling, data-driven techniques, and techno-economic analysis to enable the design of safe, economically viable, and environmentally sustainable chemical systems.</p></article><article><span class="eyebrow">RESEARCH COLLABORATIONS</span><h3>Connecting the scales.</h3><p>Our recent focus has been on collaborating with PSE to develop and refine dynamic CO₂ electrolyser models using gPROMS, with the aim of scaling them up to industrial production levels. In parallel, we are working on constructing a multiscale green methanol production model that integrates the electrolyser as a core component.</p></article></div>
       <figure class="process-panel review-pathways" id="process-explorer" aria-labelledby="pathways-title pathways-reference">
         <div class="process-heading"><div><span class="eyebrow">PROCESS EXPLORER / REVIEW FIGURE</span><h3 id="pathways-title">Follow the carbon.</h3></div><button type="button" id="route-motion-toggle" class="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
-        <div class="segmented-control route-switch" role="group" aria-label="Highlight a methanol pathway from the review figure"><button data-route="direct" aria-pressed="false">(a) Direct electrochemical</button><button data-route="two" class="is-active" aria-pressed="true">(b) Two-step</button><button data-route="hydrogenation" aria-pressed="false">(c) CO₂ hydrogenation</button><button data-route="conventional" aria-pressed="false">(d) Benchmark</button></div>
-        <p class="route-instructions">Choose a pathway to follow its animated flow. Hover, focus or select a process unit to read its explanation.</p>
+        <div class="segmented-control route-switch" role="group" aria-label="Highlight a methanol pathway from the review figure"><button data-route="direct" aria-pressed="false" aria-controls="review-pathways-map">Direct route</button><button data-route="two" aria-pressed="false" aria-controls="review-pathways-map">two-step route</button><button data-route="hydrogenation" aria-pressed="false" aria-controls="review-pathways-map">three-step route</button><button data-route="conventional" aria-pressed="false" aria-controls="review-pathways-map">Benchmark</button></div>
+        <p class="route-instructions">Select a route to focus. Select it again to show all four. Hover a process unit for its description.</p>
         <div class="route-body">
           <div class="route-graphic" tabindex="0" role="group" aria-label="Original review process flow diagram showing routes a to d; scroll horizontally on small screens">
-            <div class="route-paper-map" data-motion="playing">
+            <div class="route-paper-map" id="review-pathways-map" data-motion="playing" data-route="all">
               <img src="assets/methanol-pathways-review.png" alt="Original review process flow diagram: (a) carbon capture, CO₂ electrolysis, separation and distillation; (b) carbon capture and CO₂ electrolysis followed by methanol production with electrolytic hydrogen, separation and distillation; (c) captured CO₂ and electrolytic hydrogen feeding methanol production, separation and distillation; (d) fossil fuel and steam reforming followed by methanol production, separation and distillation. All routes lead to methanol product." width="2526" height="1785" loading="lazy">
               <svg class="route-paper-animation" viewBox="0 0 1263 892.5" aria-hidden="true" focusable="false"></svg>
               <div class="route-paper-hotspots" role="group" aria-label="Process units in the selected pathway"></div>
             </div>
           </div>
-          <div class="route-selected-summary" role="status" aria-live="polite" aria-atomic="true"><h4 id="route-selected-title">(b) Two-step electrochemical route</h4><p id="route-note">CO₂ electrolysis is followed by methanol production, separation and distillation. Water electrolysis and hydrogen storage supply the H₂ branch.</p></div>
-          <div class="route-unit-list" role="group" aria-label="Choose a process unit"></div>
-          <div class="route-detail" id="route-detail" aria-live="polite"><span class="route-detail-number" id="route-detail-number">01</span><div><h4 id="route-detail-title">Flue-gas carbon source</h4><p id="route-detail-text">Flue gas supplies the captured CO₂ routes shown in the review figure.</p></div></div>
+          <p class="sr-only" id="route-selection-status" role="status" aria-live="polite">All four routes are shown.</p>
         </div>
         <figcaption class="pathways-reference" id="pathways-reference"><p>Ref: <strong>Zhao, Y.</strong>; Wang, S.; Leonzio, G.; Fu, Q.; Wang, Y.; Xuan, J.; Xing, L. From Thermal to Electrochemical CO₂-to-Methanol Conversion: A Comprehensive Review of Process Technologies, Techno-Economics, and Life-Cycle Performance. <em>Carbon Capture Sci. Technol.</em> 2026.<br><a href="https://doi.org/10.1016/j.ccst.2026.100603" target="_blank" rel="noopener noreferrer">DOI: 10.1016/j.ccst.2026.100603 ↗</a></p></figcaption>
       </figure>

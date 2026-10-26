@@ -1,4 +1,4 @@
-/* Animate the actual review figure supplied in save1.png.pdf. */
+/* Focus one original review route while retaining the full comparison figure. */
 (() => {
   'use strict';
   const root = document.getElementById('process-explorer');
@@ -9,13 +9,45 @@
   const stage = root.querySelector('.route-body');
   const overlay = root.querySelector('.route-paper-animation');
   const hotspots = root.querySelector('.route-paper-hotspots');
-  const choices = root.querySelector('.route-unit-list');
   const toggle = document.getElementById('route-motion-toggle');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let selectedRoute = 'two';
-  let selectedNode = 0;
+  const status = document.getElementById('route-selection-status');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  let selectedRoute = null;
   let paused = false;
   let dismissed = false;
+  let visibleNodes = [];
+  const makeSVG = (tag, attributes = {}) => {
+    const element = document.createElementNS(svgNS, tag);
+    Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+    return element;
+  };
+
+  const defs = makeSVG('defs');
+  const feather = makeSVG('filter', {id: 'route-focus-feather', x: '-10%', y: '-10%', width: '120%', height: '120%'});
+  feather.append(makeSVG('feGaussianBlur', {stdDeviation: '3'}));
+  defs.append(feather);
+  const focusMask = makeSVG('mask', {id: 'route-focus-mask', maskUnits: 'userSpaceOnUse', x: '0', y: '0', width: '1263', height: '892.5'});
+  focusMask.append(makeSVG('rect', {width: '1263', height: '892.5', fill: 'black'}));
+  defs.append(focusMask);
+  overlay.append(defs);
+  const focusImage = makeSVG('image', {href: 'assets/methanol-pathways-review.png', width: '1263', height: '892.5', mask: 'url(#route-focus-mask)', class: 'route-focus-image'});
+  overlay.append(focusImage);
+  const flowLayer = makeSVG('g', {class: 'route-flow-layer'});
+  overlay.append(flowLayer);
+  Object.entries(routes).forEach(([key, route]) => {
+    const region = makeSVG('g', {class: 'route-focus-region', 'data-route-focus': key, fill: 'white', filter: 'url(#route-focus-feather)'});
+    route.focusRegions.forEach(([x, y, width, height]) => region.append(makeSVG('rect', {x, y, width, height, rx: '8'})));
+    focusMask.append(region);
+    const group = makeSVG('g', {class: 'route-flow-group', 'data-route-flow': key});
+    route.flows.forEach((d, index) => {
+      const path = makeSVG('path', {class: 'route-paper-flow', d});
+      path.style.animationDelay = `${index * -.23}s`;
+      group.append(path);
+    });
+    flowLayer.append(group);
+  });
+
   const tooltip = document.createElement('div');
   tooltip.className = 'vision-tooltip route-paper-tooltip';
   tooltip.id = 'route-unit-tooltip';
@@ -27,25 +59,9 @@
   tooltipText.className = 'vision-tooltip-text';
   tooltip.append(tooltipTitle, tooltipText);
   stage.append(tooltip);
-
-  Object.entries(routes).forEach(([key, route]) => {
-    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    group.dataset.routeFlow = key;
-    group.classList.add('route-flow-group');
-    route.flows.forEach((d, index) => {
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.classList.add('route-paper-flow');
-      path.setAttribute('d', d);
-      path.style.animationDelay = `${index * -.23}s`;
-      group.append(path);
-    });
-    overlay.append(group);
-  });
-
   function hideTooltip() { tooltip.hidden = true; }
-  function showTooltip(index, clientX, clientY) {
-    if (dismissed) return;
-    const node = routes[selectedRoute].nodes[index];
+  function showTooltip(node, clientX, clientY) {
+    if (dismissed || !node) return;
     tooltipTitle.textContent = node.name;
     tooltipText.textContent = node.text;
     tooltip.hidden = false;
@@ -61,83 +77,71 @@
     tooltip.style.left = `${Math.max(minX, Math.min(clientX - bounds.left + 18, maxX))}px`;
     tooltip.style.top = `${Math.max(minY, Math.min(y, maxY))}px`;
   }
-  function chooseNode(index, pan = false) {
-    const node = routes[selectedRoute].nodes[index];
-    if (!node) return;
-    selectedNode = index;
-    document.getElementById('route-detail-number').textContent = String(index + 1).padStart(2, '0');
-    document.getElementById('route-detail-title').textContent = node.name;
-    document.getElementById('route-detail-text').textContent = node.text;
-    root.querySelectorAll('[data-node]').forEach(button => {
-      const selected = Number(button.dataset.node) === index;
-      button.classList.toggle('is-active', selected);
-      button.setAttribute('aria-pressed', String(selected));
-    });
-    if (pan) scroll.scrollTo({left: map.clientWidth * (node.rect[0] + node.rect[2] / 2) / 1263 - scroll.clientWidth / 2, behavior: reduced.matches ? 'auto' : 'smooth'});
+  function showAtButton(node, button) {
+    const bounds = button.getBoundingClientRect();
+    showTooltip(node, bounds.left + bounds.width / 2, bounds.top + 20);
   }
-  function renderRoute(key) {
-    if (!routes[key]) return;
-    selectedRoute = key;
-    selectedNode = 0;
-    hideTooltip();
-    dismissed = false;
-    const route = routes[key];
-    map.dataset.route = key;
-    document.getElementById('route-selected-title').textContent = route.label;
-    document.getElementById('route-note').textContent = route.note;
-    root.querySelectorAll('[data-route]').forEach(button => {
-      const selected = button.dataset.route === key;
-      button.classList.toggle('is-active', selected);
-      button.setAttribute('aria-pressed', String(selected));
+  function renderHotspots() {
+    const nodes = selectedRoute ? routes[selectedRoute].nodes : Object.values(routes).flatMap(route => route.nodes);
+    const seen = new Set();
+    visibleNodes = nodes.filter(node => {
+      const signature = `${node.name}:${node.rect.join(',')}`;
+      if (seen.has(signature)) return false;
+      seen.add(signature);
+      return true;
     });
-    overlay.querySelectorAll('[data-route-flow]').forEach(group => group.classList.toggle('is-active', group.dataset.routeFlow === key));
     hotspots.replaceChildren();
-    choices.replaceChildren();
-    route.nodes.forEach((node, index) => {
+    visibleNodes.forEach((node, index) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'route-paper-unit';
-      button.dataset.node = index;
+      button.dataset.unit = index;
       button.setAttribute('aria-label', node.name);
-      button.setAttribute('aria-controls', 'route-detail');
       button.setAttribute('aria-describedby', 'route-unit-tooltip');
-      const [x, y, w, h] = node.rect;
-      button.style.cssText = `left:${x / 1263 * 100}%;top:${y / 892.5 * 100}%;width:${w / 1263 * 100}%;height:${h / 892.5 * 100}%;`;
-      button.addEventListener('click', () => chooseNode(index));
+      const [x, y, width, height] = node.rect;
+      button.style.cssText = `left:${x / 1263 * 100}%;top:${y / 892.5 * 100}%;width:${width / 1263 * 100}%;height:${height / 892.5 * 100}%;`;
+      button.addEventListener('click', () => { dismissed = false; showAtButton(node, button); });
       button.addEventListener('pointerenter', event => {
         if (event.pointerType === 'touch') return;
         dismissed = false;
-        showTooltip(index, event.clientX, event.clientY);
+        showTooltip(node, event.clientX, event.clientY);
       });
-      button.addEventListener('pointermove', event => {
-        if (!tooltip.hidden) showTooltip(index, event.clientX, event.clientY);
-      });
+      button.addEventListener('pointermove', event => { if (!tooltip.hidden) showTooltip(node, event.clientX, event.clientY); });
       button.addEventListener('pointerleave', hideTooltip);
-      button.addEventListener('focus', () => {
-        dismissed = false;
-        const bounds = button.getBoundingClientRect();
-        showTooltip(index, bounds.left + bounds.width / 2, bounds.top + 20);
-      });
+      button.addEventListener('focus', () => { dismissed = false; showAtButton(node, button); });
       button.addEventListener('blur', hideTooltip);
       button.addEventListener('keydown', event => {
         const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
         if (!step) return;
         event.preventDefault();
-        const next = (index + step + route.nodes.length) % route.nodes.length;
-        chooseNode(next);
-        hotspots.children[next].focus();
+        hotspots.children[(index + step + visibleNodes.length) % visibleNodes.length].focus();
       });
       hotspots.append(button);
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'route-unit-choice';
-      chip.dataset.node = index;
-      chip.textContent = `${String(index + 1).padStart(2, '0')} · ${node.name}`;
-      chip.setAttribute('aria-controls', 'route-detail');
-      chip.addEventListener('click', () => { hideTooltip(); chooseNode(index, true); });
-      choices.append(chip);
     });
-    chooseNode(selectedNode);
+  }
+  function renderRoute(key, pan = false) {
+    if (key && !routes[key]) return;
+    selectedRoute = key || null;
+    hideTooltip();
+    dismissed = false;
+    map.dataset.route = selectedRoute || 'all';
+    map.classList.toggle('has-focused-route', !!selectedRoute);
+    status.textContent = selectedRoute ? `${routes[selectedRoute].label} is highlighted; the other three routes are dimmed.` : 'All four routes are shown.';
+    root.querySelectorAll('.route-switch [data-route]').forEach(button => {
+      const active = button.dataset.route === selectedRoute;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    focusMask.querySelectorAll('[data-route-focus]').forEach(group => group.classList.toggle('is-active', group.dataset.routeFocus === selectedRoute));
+    flowLayer.querySelectorAll('[data-route-flow]').forEach(group => group.classList.toggle('is-active', !selectedRoute || group.dataset.routeFlow === selectedRoute));
+    if (selectedRoute) flowLayer.setAttribute('mask', 'url(#route-focus-mask)');
+    else flowLayer.removeAttribute('mask');
+    renderHotspots();
+    if (pan && scroll.clientWidth < map.clientWidth) {
+      const region = selectedRoute && routes[selectedRoute].focusRegions[0];
+      const left = region ? map.clientWidth * (region[0] + region[2] / 2) / 1263 - scroll.clientWidth / 2 : 0;
+      scroll.scrollTo({left, behavior: reduced.matches ? 'auto' : 'smooth'});
+    }
   }
   function updateMotion() {
     const stopped = paused || reduced.matches;
@@ -148,18 +152,20 @@
   }
   function handleViewportChange() {
     const focused = hotspots.querySelector(':focus');
-    if (focused && !dismissed) {
-      const bounds = focused.getBoundingClientRect();
-      showTooltip(Number(focused.dataset.node), bounds.left + bounds.width / 2, bounds.top + 20);
-    } else hideTooltip();
+    if (focused && !dismissed) showAtButton(visibleNodes[Number(focused.dataset.unit)], focused);
+    else hideTooltip();
   }
-  root.querySelectorAll('[data-route]').forEach(button => button.addEventListener('click', () => renderRoute(button.dataset.route)));
-  root.addEventListener('keydown', event => { if (event.key === 'Escape') { dismissed = true; hideTooltip(); } });
+  root.querySelectorAll('.route-switch [data-route]').forEach(button => button.addEventListener('click', () => renderRoute(button.dataset.route === selectedRoute ? null : button.dataset.route, true)));
+  root.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    if (!tooltip.hidden) { dismissed = true; hideTooltip(); }
+    else renderRoute(null);
+  });
   scroll.addEventListener('scroll', handleViewportChange, {passive:true});
   addEventListener('scroll', handleViewportChange, {passive:true});
   addEventListener('resize', handleViewportChange, {passive:true});
   toggle.addEventListener('click', () => { paused = !paused; updateMotion(); });
   reduced.addEventListener('change', updateMotion);
-  renderRoute('two');
+  renderRoute(null);
   updateMotion();
 })();

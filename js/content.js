@@ -244,8 +244,7 @@ window.PORTFOLIO = {
   ],
   "routes": {
     "direct": {
-      "label": "(a) Direct electrochemical route",
-      "note": "Captured CO₂ passes through the CO₂ electrolyser, separation units and distillation. The figure shows no separate methanol-production unit in this route.",
+      "label": "Direct route",
       "nodes": [
         {
           "name": "Flue-gas carbon source",
@@ -314,11 +313,18 @@ window.PORTFOLIO = {
         "M622 115L657 115",
         "M782 115L818 115",
         "M907 116C978 121 1018 211 1050 326"
+      ],
+      "focusRegions": [
+        [
+          332,
+          60,
+          614,
+          151
+        ]
       ]
     },
     "two": {
-      "label": "(b) Two-step electrochemical route",
-      "note": "CO₂ electrolysis is followed by methanol production, separation and distillation. Water electrolysis and hydrogen storage supply the H₂ branch.",
+      "label": "two-step route",
       "nodes": [
         {
           "name": "Flue-gas carbon source",
@@ -420,11 +426,24 @@ window.PORTFOLIO = {
         "M976 260C1017 263 1037 296 1050 326",
         "M472 393L507 393",
         "M556 346L556 314"
+      ],
+      "focusRegions": [
+        [
+          280,
+          213,
+          707,
+          152
+        ],
+        [
+          372,
+          350,
+          230,
+          130
+        ]
       ]
     },
     "hydrogenation": {
-      "label": "(c) CO₂ hydrogenation route",
-      "note": "Captured CO₂ and hydrogen from water electrolysis feed methanol production directly, followed by separation and distillation.",
+      "label": "three-step route",
       "nodes": [
         {
           "name": "Flue-gas carbon source",
@@ -515,11 +534,24 @@ window.PORTFOLIO = {
         "M910 542C975 541 1024 518 1048 475",
         "M394 678L429 678",
         "M485 626L485 597"
+      ],
+      "focusRegions": [
+        [
+          349,
+          492,
+          582,
+          151
+        ],
+        [
+          291,
+          632,
+          251,
+          132
+        ]
       ]
     },
     "conventional": {
-      "label": "(d) Fossil-fuel benchmark",
-      "note": "Fossil fuel passes through a steam reformer before methanol production, separation and distillation.",
+      "label": "Benchmark",
       "nodes": [
         {
           "name": "Fossil fuel",
@@ -588,6 +620,14 @@ window.PORTFOLIO = {
         "M642 810L677 810",
         "M797 810L833 810",
         "M920 798C990 784 1027 638 1048 478"
+      ],
+      "focusRegions": [
+        [
+          170,
+          752,
+          766,
+          135
+        ]
       ]
     }
   },
