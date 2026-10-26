@@ -145,7 +145,7 @@
       [[[-.12,-.27,0],'y'],[[.28,0,0],'x'],[[0,0,.28],'z']].forEach(([p,label]) => {
         const r = rotate(p,this.yaw,this.pitch), x=ox+r[0]*48,y=oy+r[1]*48;
         ctx.strokeStyle=rgba(ink,.55);ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(x,y);ctx.stroke();
-        ctx.fillStyle=rgba(ink,.7);ctx.font='6px monospace';ctx.textAlign='center';ctx.fillText(label,x+(x-ox)*.4,y+(y-oy)*.4);
+        ctx.fillStyle=rgba(ink,.7);ctx.font='11px monospace';ctx.textAlign='center';ctx.fillText(label,x+(x-ox)*.4,y+(y-oy)*.4);
       });
     }
   }
@@ -226,8 +226,8 @@
     hideTooltip(){this.hoverId=null;if(this.tooltip)this.tooltip.hidden=true;}
     draw(){
       const {ctx,w,h}=this.surface;if(w<2||h<2)return;ctx.clearRect(0,0,w,h);
-      const col={line:'#769984',muted:'#b4c6bb',point:'#9bbdad',best:'#e7d7a8',white:'#f0f2df'};
-      this.positions=[];ctx.font='9px Arial, sans-serif';ctx.textBaseline='middle';
+      const col={line:'#769984',muted:'#d7e2d8',point:'#9bbdad',best:'#e7d7a8',white:'#f0f2df'};
+      this.positions=[];ctx.font='12px Arial, sans-serif';ctx.textBaseline='middle';
       if(this.view==='2d'){this.draw2D(ctx,w,h,col);return;}
       const scale=Math.min(w*.255,h*.34),cx=w*.51,cy=h*.49;
       const project=p=>{const r=rotate(p,this.yaw,this.pitch);return{x:cx+r[0]*scale,y:cy+r[1]*scale,z:r[2]};};
@@ -238,7 +238,7 @@
       const origin=[-1,1,-1];
       line(origin,[1,1,-1],rgba(col.line,.75),1);line(origin,[-1,-1,-1],rgba(col.line,.75),1);line(origin,[-1,1,1],rgba(col.line,.75),1);
       const labels=[{p:[1.13,1,-1],s:'Capital index',dx:5,dy:9},{p:[-1,-1.17,-1],s:'Carbon index',dx:0,dy:-5},{p:[-1,1,1.16],s:'Electricity index',dx:-3,dy:14}];
-      labels.forEach(l=>{const p=project(l.p);ctx.fillStyle=col.muted;ctx.textAlign='center';ctx.font=`${w<400?8:9}px Arial, sans-serif`;const tw=ctx.measureText(l.s).width;ctx.fillText(l.s,clamp(p.x+l.dx,tw/2+2,w-tw/2-2),clamp(p.y+l.dy,12,h-12));});
+      labels.forEach(l=>{const p=project(l.p);ctx.fillStyle=col.muted;ctx.textAlign='center';ctx.font=`${w<400?11:12}px Arial, sans-serif`;const tw=ctx.measureText(l.s).width;ctx.fillText(l.s,clamp(p.x+l.dx,tw/2+2,w-tw/2-2),clamp(p.y+l.dy,12,h-12));});
       const index=new Map(this.data.map(p=>[`${p.i},${p.j}`,p]));
       this.data.forEach(p=>{[[p.i+1,p.j],[p.i,p.j+1]].forEach(([i,j])=>{const q=index.get(`${i},${j}`);if(q)line(world(p),world(q),rgba(col.point,.19),.6);});});
       this.positions=this.data.map(p=>({...p,...project(world(p))}));
@@ -255,17 +255,17 @@
       ctx.fillStyle=rgba(best?col.best:col.point,alpha);ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
     }
     drawTag(ctx,p,w,h,col){
-      const text=p.id+'  ↗',tw=49,th=21,x=clamp(p.x+14,2,w-tw-2),y=clamp(p.y-28,2,h-th-2);
+      const text=p.id+'  ↗',tw=66,th=26,x=clamp(p.x+14,2,w-tw-2),y=clamp(p.y-28,2,h-th-2);
       ctx.fillStyle='#233e35';ctx.fillRect(x,y,tw,th);ctx.strokeStyle=rgba(col.best,.55);ctx.lineWidth=.7;ctx.strokeRect(x,y,tw,th);
-      ctx.fillStyle=col.best;ctx.font='9px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,x+tw/2,y+th/2);
+      ctx.fillStyle=col.best;ctx.font='11px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,x+tw/2,y+th/2);
     }
     draw2D(ctx,w,h,col){
       const pad={left:50,right:22,top:36,bottom:50},pw=w-pad.left-pad.right,ph=h-pad.top-pad.bottom;
       const point=p=>({x:pad.left+(p.energy-35)/65*pw,y:pad.top+(90-p.carbon)/35*ph});
-      ctx.font='8px Arial, sans-serif';
+      ctx.font='12px Arial, sans-serif';
       [35,50,65,80,100].forEach(v=>{const x=pad.left+(v-35)/65*pw;ctx.strokeStyle=rgba(col.line,.22);ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(x,pad.top);ctx.lineTo(x,h-pad.bottom);ctx.stroke();ctx.fillStyle=col.muted;ctx.textAlign='center';ctx.fillText(String(v),x,h-pad.bottom+16);});
       [55,65,75,90].forEach(v=>{const y=pad.top+(90-v)/35*ph;ctx.strokeStyle=rgba(col.line,.22);ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(w-pad.right,y);ctx.stroke();ctx.fillStyle=col.muted;ctx.textAlign='right';ctx.fillText(String(v),pad.left-10,y);});
-      ctx.fillStyle=col.muted;ctx.textAlign='left';ctx.font='8px Arial, sans-serif';ctx.fillText('Carbon index ↑',pad.left,13);ctx.textAlign='right';ctx.fillText('Size = capital index',w-pad.right,13);ctx.textAlign='center';ctx.fillText('Electricity index →',pad.left+pw/2,h-10);
+      ctx.fillStyle=col.muted;ctx.textAlign='left';ctx.font='12px Arial, sans-serif';ctx.fillText('Carbon index ↑',pad.left,13);ctx.textAlign='right';ctx.fillText('Size = capital index',w-pad.right,13);ctx.textAlign='center';ctx.fillText('Electricity index →',pad.left+pw/2,h-10);
       this.positions=this.data.map(p=>({...p,...point(p)}));
       this.positions.forEach(p=>this.dot(ctx,p,p.id===this.bestId?5:2.2+(p.cost-35)/65*2.6,.8,col));
       const best=this.positions.find(p=>p.id===this.bestId);if(best)this.drawTag(ctx,best,w,h,col);

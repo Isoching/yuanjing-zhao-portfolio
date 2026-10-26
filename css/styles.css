@@ -92,3 +92,98 @@ dialog{border:1px solid var(--line);padding:0;color:var(--ink);background:var(--
 @media(max-width:760px){.research-profile-grid{grid-template-columns:1fr;gap:30px;margin-top:32px;padding-top:25px}.research-profile-grid h3{font-size:23px}.research-profile-grid p{font-size:12px}.publication-filters{gap:9px 18px}.publication-filters button{font-size:10px}.profile-overview{grid-template-columns:1fr;gap:32px}.profile-card{display:grid;grid-template-columns:110px minmax(0,1fr);column-gap:22px;padding:22px}.profile-portrait{grid-column:1;grid-row:1/4;width:110px;margin:0}.profile-card>.eyebrow,.profile-card>h3,.profile-card>p{grid-column:2}.profile-card>.eyebrow{font-size:7px}.profile-card h3{font-size:21px;margin:5px 0 7px}.profile-card>p{font-size:10px;line-height:1.7}.profile-accounts{grid-column:1/-1;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:22px}.profile-accounts a{font-size:10px;padding:12px 0}.profile-biography>p{font-size:12px;line-height:1.9}.profile-biography>p:first-child{font-size:15px}.profile-details-grid{grid-template-columns:1fr;gap:36px;margin-top:38px;padding-top:32px}.profile-detail-block h3,.subsection-heading h3{font-size:25px}.qualification-list h4,.membership-grid h4{font-size:12px}.qualification-list p,.membership-grid p{font-size:11px}.department-list a{font-size:12px}.profile-memberships{margin-top:36px}.membership-grid{grid-template-columns:1fr 1fr;gap:22px}.teaching-row{grid-template-columns:1fr;gap:9px;padding:22px 0}.teaching-row h3{font-size:17px}.teaching-row>p{font-size:11px}.sdg-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sdg-card{padding:19px;min-height:169px}.sdg-number{font-size:38px;margin-bottom:22px}.sdg-label{font-size:12px}.sdg-arrow{top:15px;right:15px;font-size:18px}.contact-facts dd{font-size:11px}.contact-facts>div{grid-template-columns:66px minmax(0,1fr);gap:10px}}
 @media(max-width:360px){.profile-card{grid-template-columns:85px minmax(0,1fr);gap:0 17px;padding:18px}.profile-portrait{width:85px}.profile-card h3{font-size:18px}.profile-accounts{gap:0 15px}.membership-grid{grid-template-columns:1fr}.sdg-card{padding:16px}.sdg-label{font-size:11px}}
 @media print{.profile-overview,.profile-details-grid{display:block}.profile-card{max-width:280px;margin-bottom:25px}.profile-accounts{display:none}.profile-portrait{width:150px}.membership-grid{grid-template-columns:repeat(2,1fr)}.sdg-grid{grid-template-columns:repeat(4,1fr)}.profile-detail-block,.teaching-row,.sdg-card{break-inside:avoid}}
+
+/* Readable text scale and stronger contrast, October 2026. */
+:root{--ink:#1d2a23;--muted:#424f46;--faint:#56645a;--accent:#2e523e;--plot-text:#f3f7f0;--plot-muted:#d7e2d8}
+:root[data-theme="dusk"]{--ink:#f4f6ee;--muted:#d0dacb;--faint:#b9c8b4;--accent:#d1e5c1;--plot-text:#f3f7f0;--plot-muted:#d7e2d8}
+body{font-size:18px;line-height:1.8}
+.micro,.eyebrow{font-size:12px;letter-spacing:.08em}
+.brand-name{font-size:12px}.brand-name>span{font-size:10px}
+.desktop-nav a,.contact-nav{font-size:14px}.desktop-nav{gap:20px}.header-inner{gap:18px}
+.command-trigger kbd{font-size:11px}.mobile-nav a{font-size:17px}
+.text-link,.button{font-size:16px}.button{min-height:50px}
+.hero .eyebrow{font-size:11px}.hero-intro{font-size:19px;line-height:1.85;max-width:470px}
+.affiliation{font-size:15px}.affiliation strong{font-size:16px}
+.section-description{font-size:18px;line-height:1.85;max-width:390px}
+.scene-top>.micro{font-size:11px}.scene-motion{font-size:12px}.scene-bottom p{font-size:15px}
+.molecule-note{font-size:11px}.note-two{font-size:12px}.note-two span{font-size:9px}
+.interaction-hint,.scene-index{font-size:10px}.note-one{right:22px}
+.discipline-strip div{font-size:15px}.discipline-strip span{font-size:12px}
+.card-topline .micro{font-size:11px}.card-number{font-size:13px}.card-status{font-size:13px}
+.card-description{font-size:16px;line-height:1.8}.card-footer{font-size:14px}
+.research-profile-grid p{font-size:18px;line-height:1.85}
+.process-heading .eyebrow{font-size:11px}.segmented-control button{font-size:14px}
+.route-detail h4{font-size:17px}.route-detail p{font-size:16px;line-height:1.85}
+.route-action{font-size:10px}.figure-note{font-size:13px}
+.route-node .node-name{font-size:14px}.route-node .node-sub{font-size:10px}.route-node .node-no{font-size:11px}
+.route-aux{font-size:11px}
+.demo-badge{font-size:13px}.lab-plot-top .micro{font-size:11px}.plot-subheading{font-size:13px}
+.plot-view-controls button{font-size:14px;padding:7px 10px}.plot-bottom{font-size:12px}.plot-interaction-label{font-size:10px}
+.control-heading>.eyebrow{font-size:12px}.control-heading p{font-size:16px;line-height:1.8}
+.preset{font-size:14px;padding:9px 12px}.weight-control label{font-size:16px}.weight-control output{font-size:15px}
+.recommendation-header .micro{font-size:11px}.recommendation-header>span:last-child{font-size:15px}
+.recommendation-metrics span{font-size:13px}.recommendation-foot{font-size:12px;line-height:1.7}.recommendation-foot button{font-size:12px}
+.closeness{font-size:14px}.download-data{font-size:15px}.lab-footnotes summary{font-size:15px}
+.lab-footnotes details p{font-size:16px;line-height:1.85}.table-scroll table{font-size:14px}.table-scroll th{font-size:13px}.table-scroll caption{font-size:13px}
+.chart-tooltip{font-size:13px}.chart-tooltip span{font-size:12px}
+.publication-filters button{font-size:15px}.publication-filters button>span{font-size:12px}
+.publication-toolbar>.micro{font-size:11px}.publication-row{grid-template-columns:110px minmax(0,1fr) 110px}
+.publication-type{font-size:11px;line-height:1.7}.publication-authors{font-size:16px;line-height:1.8}
+.publication-journal{font-size:16px;line-height:1.8}.publication-note{font-size:13px;line-height:1.8}
+.publication-actions a{font-size:14px}.publication-actions button{font-size:12px}.publication-footnote{font-size:14px;line-height:1.85}
+.profile-overview{grid-template-columns:320px minmax(0,1fr);gap:54px}
+.profile-card>p{font-size:16px;line-height:1.8}.profile-accounts a{font-size:15px;padding:13px 0}
+.profile-biography>p{font-size:18px;line-height:1.85}.profile-biography>p:first-child{font-size:19px;line-height:1.85}
+.profile-source-note{font-size:14px}.profile-source-note p{font-size:14px}
+.qualification-list time{font-size:13px}.qualification-list h4,.membership-grid h4{font-size:17px}
+.qualification-list p,.membership-grid p{font-size:16px;line-height:1.85}.department-list a{font-size:17px}
+.teaching-row>p{font-size:16px;line-height:1.85}.course-code{font-size:13px}
+.contact-section p{font-size:18px;line-height:1.85}.contact-facts dt{font-size:11px}.contact-facts dd{font-size:16px}
+.contact-facts>div{grid-template-columns:80px minmax(0,1fr)}.contact-facts{max-width:460px}
+.copy-email,.external-links{font-size:15px}.site-footer,.prototype-info{font-size:13px}.back-top{font-size:11px}
+.detail-dialog p,.prototype-list{font-size:17px;line-height:1.85}.detail-dialog h3{font-size:19px}
+.dialog-top>.micro,.dialog-status{font-size:12px}.dialog-tags span{font-size:14px}.detail-dialog .button{font-size:15px}
+.detail-dialog .dialog-source{font-size:14px!important}.citation-tabs button{font-size:15px}.citation-text{font-size:14px;line-height:1.85}
+.command-input-row input{font-size:17px}.command-result{font-size:16px}.command-result>span{font-size:11px}
+.command-close,.command-footer{font-size:11px}.command-empty{font-size:15px}.toast{font-size:15px}
+.profile-portrait{object-position:center 30%}
+.profile-cv{display:flex;width:100%;margin-top:24px;gap:16px;text-align:center}
+.sustainability-section{background:var(--surface)}
+.sustainability-section .section-heading{display:block;text-align:center}
+.sustainability-section .eyebrow{justify-content:center}
+.sustainability-section .section-description{max-width:760px;margin:26px auto 0}
+.sdg-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
+.sdg-card{display:block;flex:0 1 calc((100% - 72px)/4);aspect-ratio:1;min-height:0;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden}
+.sdg-card img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+@media(min-width:1025px) and (max-width:1280px){.desktop-nav{gap:14px}.brand{gap:12px}.header-inner{gap:14px}.command-trigger{display:none}.brand-name{font-size:11px}.brand-name>span{font-size:9px}}
+@media(max-width:1024px){.profile-overview{grid-template-columns:280px minmax(0,1fr);gap:32px}.route-action{display:none}.lab-shell{grid-template-columns:1fr}.sdg-grid{gap:20px}.sdg-card{flex-basis:calc((100% - 60px)/4)}}
+@media(max-width:760px){
+  body{font-size:16px}.micro,.eyebrow{font-size:11px}.section-description{font-size:16px}
+  .brand-name{font-size:10px}.brand-name>span{font-size:8px}.hero .eyebrow{font-size:10px}
+  .hero-intro{font-size:17px}.hero-ctas{gap:18px;flex-wrap:wrap}.hero-ctas .button,.hero-ctas .text-link{font-size:14px}
+  .hero-ctas .button{padding-inline:17px}.affiliation{font-size:14px}.affiliation strong{font-size:15px}
+  .scene-top>.micro{font-size:9px}.scene-motion{font-size:11px}.molecule-note{font-size:10px}.note-two span{font-size:8px}
+  .scene-index{font-size:9px}.interaction-hint{font-size:9px}.discipline-strip div{font-size:13px}.discipline-strip span{font-size:11px}
+  .research-card{display:flex;flex-direction:column;padding:25px}.card-topline .micro{font-size:10px}.card-art{height:160px;margin:0 0 20px}.card-copy{display:block}
+  .card-status{font-size:12px}.card-description{font-size:16px;max-width:none}.card-footer{font-size:14px;width:100%}
+  .research-profile-grid p{font-size:16px}.process-heading{align-items:flex-start;flex-direction:column}.segmented-control{max-width:100%;align-self:stretch}.segmented-control button{flex:1;padding:8px 10px;font-size:13px}
+  .route-detail p{font-size:15px}.route-detail h4{font-size:16px}.figure-note{font-size:12px}
+  .demo-badge{font-size:12px}.lab-plot-top{gap:12px}.lab-plot-top .micro{font-size:9px}.plot-subheading{font-size:12px}
+  .control-heading p{font-size:16px}.preset{font-size:13px;padding:8px 11px}.weight-control label{font-size:16px}
+  .plot-bottom{font-size:11px;flex-wrap:wrap;gap:10px}.plot-interaction-label{display:none}.lab-footnotes details p{font-size:16px}
+  .publication-row{grid-template-columns:65px minmax(0,1fr);gap:20px}.publication-year{font-size:25px}.publication-type{font-size:10px}
+  .publication-authors,.publication-journal{font-size:15px}.publication-note{font-size:12px}.publication-actions{grid-column:2;flex-wrap:wrap;align-items:flex-start}
+  .publication-actions a{font-size:14px}.publication-actions button{font-size:12px}.publication-filters{gap:10px 18px}.publication-filters button{font-size:14px}
+  .publication-filters button>span{font-size:11px}.publication-footnote{font-size:13px}
+  .profile-overview{grid-template-columns:1fr}.profile-card{display:grid;grid-template-columns:110px minmax(0,1fr);padding:22px;column-gap:22px}
+  .profile-card>.eyebrow{font-size:10px}.profile-card>p{font-size:14px}.profile-accounts a{font-size:14px}.profile-biography>p{font-size:16px}.profile-biography>p:first-child{font-size:17px}
+  .profile-cv{grid-column:1/-1;font-size:16px}.profile-source-note,.profile-source-note p{font-size:13px}
+  .qualification-list h4,.membership-grid h4{font-size:16px}.qualification-list p,.membership-grid p{font-size:15px}.qualification-list time{font-size:12px}
+  .department-list a{font-size:16px}.membership-grid{grid-template-columns:1fr;gap:22px}.teaching-row>p{font-size:15px}.course-code{font-size:12px}
+  .sdg-grid{gap:16px}.sdg-card{flex-basis:calc((100% - 16px)/2);min-height:0;padding:0}.sustainability-section .section-description{font-size:16px}
+  .contact-section p{font-size:16px}.contact-facts dd{font-size:15px}.contact-facts>div{grid-template-columns:70px minmax(0,1fr)}
+  .external-links,.copy-email{font-size:14px}.site-footer,.prototype-info{font-size:12px}.back-top{font-size:11px}
+  .detail-dialog p{font-size:16px}.dialog-top>.micro{font-size:11px}.command-input-row input{font-size:16px}.command-footer{font-size:10px;flex-wrap:wrap}
+}
+@media(max-width:360px){.profile-card{grid-template-columns:90px minmax(0,1fr);padding:18px;column-gap:16px}.profile-portrait{width:90px}.profile-card>p{font-size:13px}.profile-accounts{column-gap:16px}.profile-accounts a{font-size:13px}.card-topline .micro{font-size:9px}.lab-plot-top{flex-wrap:wrap}.plot-view-controls{margin-left:auto}}
+.route-graphic>svg{min-width:860px}

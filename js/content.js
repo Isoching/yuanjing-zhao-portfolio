@@ -11,7 +11,7 @@ window.PORTFOLIO = {
     "scholar": "https://scholar.google.com/citations?user=balopHwAAAAJ&hl=zh-CN&oi=ao",
     "github": null,
     "linkedin": "https://www.linkedin.com/in/yuanjing-zhao-4ba599129/?locale=en_US",
-    "cv": null,
+    "cv": "assets/YZ_CV.pdf",
     "researchgate": "https://www.researchgate.net/profile/Yuanjing-Zhao-4?ev=hdr_xprf",
     "orcid": "https://orcid.org/0009-0000-9567-9746",
     "portfolio": "https://jason30zhao.wixsite.com/147studio"
