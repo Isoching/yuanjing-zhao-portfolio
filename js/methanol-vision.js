@@ -1,9 +1,7 @@
 /* Interactive layer for the author-provided green methanol systems figure. */
 (() => {
   'use strict';
-  const root = document.getElementById('methanol-vision');
-  if (!root) return;
-  const modules = [
+  const systemModules = [
     { id: 'wind', name: 'Wind turbines', short: 'Wind power', x: 31, y: 2, w: 50, h: 23,
       description: 'Wind turbines convert wind energy into electricity. Renewable power supports water electrolysis, carbon conversion and other operations across the system.' },
     { id: 'solar', name: 'Solar panels', short: 'Solar power', x: 73, y: 54, w: 23, h: 17,
@@ -31,6 +29,30 @@
     { id: 'fuel', name: 'Fuel cell station', short: 'Fuel cells', x: 69, y: 74, w: 27, h: 24,
       description: 'Fuel cells convert stored hydrogen into electricity. This pathway can provide flexible power when renewable generation and electricity demand do not coincide.' }
   ];
+  const assessmentModules = [
+    { id: 'physics', name: 'Physics-based process model', short: 'Physics-based model', x: 18.5, y: 9, w: 24.5, h: 23,
+      description: 'A physics-based model describes transport and electrochemical conversion at process scale. Its outputs supply the data used to develop a compact, interpretable surrogate.' },
+    { id: 'surrogate', name: 'Symbolic-regression surrogate', short: 'Symbolic regression', x: 50, y: 9, w: 20, h: 23,
+      description: 'Symbolic regression distils process-model data into explicit mathematical expressions. These surrogates enable rapid evaluation within a larger production-system model.' },
+    { id: 'coupling', name: 'Process-to-system coupling', short: 'Scale coupling', x: 42.5, y: 34.7, w: 20, h: 16.8,
+      description: 'Process-scale surrogates are embedded in a system-level mass and energy balance. This connection lets electrolyser behaviour inform the performance of complete methanol production pathways.' },
+    { id: 'co2-electrolyser', name: 'CO₂ electrolyser', short: 'CO₂ electrolysis', x: 17, y: 53, w: 15, h: 24,
+      description: 'The CO₂ electrolyser uses electricity to convert carbon dioxide into a carbon-containing intermediate such as CO. Its conversion and energy demand affect downstream methanol production.' },
+    { id: 'water-electrolyser', name: 'Water electrolyser', short: 'Water electrolysis', x: 32, y: 54, w: 11, h: 24,
+      description: 'Water electrolysis produces hydrogen using electricity. Hydrogen is combined with the carbon-containing feed in the methanol production system.' },
+    { id: 'renewables', name: 'Renewable electricity', short: 'Renewable power', x: 10.5, y: 75.5, w: 21, h: 11,
+      description: 'Wind and solar represent renewable electricity inputs. The UK energy-system context helps connect electricity supply with the technical, economic and environmental assessment.' },
+    { id: 'production', name: 'Methanol production system', short: 'Methanol production', x: 48, y: 54, w: 25, h: 28,
+      description: 'The production system combines the carbon-containing stream and hydrogen into methanol. Mass and energy balances link the electrolyser units with downstream process requirements.' },
+    { id: 'performance', name: 'Technical performance', short: 'Performance', x: 81.5, y: 31.5, w: 16.5, h: 18.5,
+      description: 'Technical assessment tracks the behaviour of each pathway, including carbon utilisation and energy requirements, using the integrated process and system models.' },
+    { id: 'tea', name: 'Techno-economic analysis (TEA)', short: 'TEA', x: 81.5, y: 51.5, w: 16.5, h: 19,
+      description: 'Techno-economic analysis translates process requirements into costs. It supports comparison of electrified production routes with a conventional thermochemical benchmark.' },
+    { id: 'lca', name: 'Life-cycle assessment (LCA)', short: 'LCA', x: 81.5, y: 72, w: 16.5, h: 19,
+      description: 'Life-cycle assessment evaluates environmental impacts across the production chain. Electricity supply and carbon conversion are considered within the pathway comparison.' }
+  ];
+  function initialiseFigure(root, modules, initialSelection) {
+  if (!root) return;
   const byId = new Map(modules.map((module, index) => [module.id, { ...module, number: index + 1 }]));
   const stage = root.querySelector('.vision-stage');
   const map = root.querySelector('.vision-map');
@@ -41,12 +63,12 @@
   const tooltip = root.querySelector('.vision-tooltip');
   const tooltipTitle = root.querySelector('.vision-tooltip-title');
   const tooltipText = root.querySelector('.vision-tooltip-text');
-  const detailTitle = document.getElementById('vision-detail-title');
-  const detailText = document.getElementById('vision-detail-text');
+  const detailTitle = root.querySelector('.vision-detail h3');
+  const detailText = root.querySelector('.vision-detail p');
   const detailNumber = root.querySelector('.vision-detail-number');
-  const toggle = document.getElementById('vision-motion-toggle');
+  const toggle = root.querySelector('.vision-motion-toggle');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let selected = 'ai';
+  let selected = initialSelection;
   let pointerModule = null;
   let paused = false;
   let dismissed = false;
@@ -101,7 +123,7 @@
   modules.forEach((module, index) => {
     const number = String(index + 1).padStart(2, '0');
     const definition = document.createElement('p');
-    definition.id = `vision-description-${module.id}`;
+    definition.id = `${root.id}-description-${module.id}`;
     definition.textContent = module.description;
     definitions.append(definition);
     const hotspot = document.createElement('button');
@@ -110,7 +132,7 @@
     hotspot.dataset.module = module.id;
     hotspot.setAttribute('aria-label', module.name);
     hotspot.setAttribute('aria-describedby', definition.id);
-    hotspot.setAttribute('aria-controls', 'vision-detail');
+    hotspot.setAttribute('aria-controls', root.querySelector('.vision-detail').id);
     hotspot.style.cssText = `left:${module.x}%;top:${module.y}%;width:${module.w}%;height:${module.h}%;`;
     const pin = document.createElement('span');
     pin.className = 'vision-pin';
@@ -140,7 +162,7 @@
     chip.dataset.module = module.id;
     chip.setAttribute('aria-label', module.name);
     chip.setAttribute('aria-describedby', definition.id);
-    chip.setAttribute('aria-controls', 'vision-detail');
+    chip.setAttribute('aria-controls', root.querySelector('.vision-detail').id);
     const chipNumber = document.createElement('span');
     chipNumber.textContent = number;
     chipNumber.setAttribute('aria-hidden', 'true');
@@ -156,9 +178,16 @@
   root.addEventListener('keydown', event => {
     if (event.key === 'Escape') { dismissed = true; hideTooltip(); }
   });
-  scroll.addEventListener('scroll', hideTooltip, { passive: true });
-  addEventListener('scroll', hideTooltip, { passive: true });
-  addEventListener('resize', hideTooltip, { passive: true });
+  function handleViewportChange() {
+    const focused = root.querySelector('.vision-hotspot:focus');
+    if (focused && !dismissed) {
+      const bounds = focused.getBoundingClientRect();
+      showTooltip(focused.dataset.module, bounds.left + bounds.width / 2, bounds.top + Math.min(30, bounds.height / 2));
+    } else hideTooltip();
+  }
+  scroll.addEventListener('scroll', handleViewportChange, { passive: true });
+  addEventListener('scroll', handleViewportChange, { passive: true });
+  addEventListener('resize', handleViewportChange, { passive: true });
   function updateMotion() {
     const stopped = paused || reduced.matches;
     map.dataset.motion = stopped ? 'paused' : 'playing';
@@ -169,6 +198,9 @@
   toggle.addEventListener('click', () => { paused = !paused; updateMotion(); });
   reduced.addEventListener('change', updateMotion);
   select(selected);
-  if (scroll.clientWidth < map.clientWidth) scroll.scrollLeft = map.clientWidth * .57 - scroll.clientWidth / 2;
+  if (root.id === 'methanol-vision' && scroll.clientWidth < map.clientWidth) scroll.scrollLeft = map.clientWidth * .57 - scroll.clientWidth / 2;
   updateMotion();
+  }
+  initialiseFigure(document.getElementById('methanol-vision'), systemModules, 'ai');
+  initialiseFigure(document.getElementById('multiscale-assessment'), assessmentModules, 'physics');
 })();

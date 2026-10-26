@@ -29,7 +29,7 @@
       <nav class="desktop-nav" aria-label="Main navigation"><a href="#research">Research</a><a href="#playground">Playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a></nav>
       <div class="header-actions"><button class="command-trigger" id="command-trigger" title="Find a section (Command or Control + K)" aria-label="Open command menu"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="4.8"/><path d="m12 12 4.5 4.5"/></svg><kbd>⌘ K</kbd></button><button class="icon-button theme-toggle" id="theme-toggle" aria-label="Switch to dusk theme" title="Switch theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 13a8.7 8.7 0 0 1-9.7-9.7A8.8 8.8 0 1 0 20.7 13Z"/></svg></button><a href="#contact" class="contact-nav">Let’s talk <span aria-hidden="true">↗</span></a><button class="menu-toggle icon-button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button></div>
     </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#methanol-vision">Green methanol system</a><a href="#research">Research</a><a href="#playground">Interactive playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a><a href="#sustainability">Sustainable development goals</a><a href="#contact">Contact</a></nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#methanol-vision">Green methanol system</a><a href="#multiscale-assessment">Multiscale assessment</a><a href="#research">Research</a><a href="#playground">Interactive playground</a><a href="#publications">Publications</a><a href="#about">About</a><a href="#teaching">Teaching</a><a href="#sustainability">Sustainable development goals</a><a href="#contact">Contact</a></nav>
   </header>
   <main id="main">
     <section class="hero wrap" id="home" aria-labelledby="hero-title">
@@ -49,7 +49,7 @@
               <svg class="vision-animation" viewBox="0 0 1000 689.286" aria-hidden="true" focusable="false">
                 <defs>
                   <filter id="vision-wind-feather"><feGaussianBlur stdDeviation="1.4"/></filter>
-                  <mask id="vision-wind-cleanup" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="210"><rect width="1000" height="210" fill="black"/><g fill="white" filter="url(#vision-wind-feather)"><circle cx="350" cy="140" r="54"/><circle cx="444" cy="118" r="54"/><circle cx="515" cy="105" r="52"/><circle cx="593" cy="79" r="54"/><circle cx="669" cy="47" r="54"/></g><rect y="171" width="1000" height="39" fill="black"/></mask>
+                  <mask id="vision-wind-cleanup" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="210"><rect width="1000" height="210" fill="black"/><g fill="white" filter="url(#vision-wind-feather)"><circle cx="350" cy="140" r="54"/><circle cx="444" cy="118" r="54"/><circle cx="515" cy="105" r="52"/><circle cx="593" cy="79" r="54"/><circle cx="669" cy="47" r="54"/><path d="M436 164L478 147M502 158L539 139M588 126L623 103M663 93L700 76" stroke="white" stroke-width="17" stroke-linecap="round"/></g><g fill="white" filter="url(#vision-wind-feather)"><ellipse cx="460" cy="165" rx="29" ry="14"/><ellipse cx="533" cy="152" rx="28" ry="14"/><ellipse cx="611" cy="124" rx="28" ry="14"/><ellipse cx="687" cy="93" rx="25" ry="13"/></g><rect x="0" y="174" width="400" height="36" fill="black"/></mask>
                   <mask id="vision-ocean-mask" maskUnits="userSpaceOnUse" x="0" y="205" width="210" height="485">
                     <path d="M0 226C50 218 112 219 163 244C181 253 172 265 155 278C144 291 149 307 161 321C167 333 158 344 174 355C190 369 178 385 166 399C161 414 155 432 135 441C114 448 103 447 106 464C113 484 94 499 93 516C91 531 108 547 105 570C106 590 94 605 86 622C75 641 41 650 0 677Z" fill="white"/>
                     <rect x="129" y="270" width="94" height="38" fill="black"/>
@@ -67,32 +67,34 @@
                 </defs>
                 <g mask="url(#vision-ocean-mask)">
                   <g class="vision-ocean-swell"><image class="vision-ocean-texture" href="assets/green-methanol-vision.png" width="1000" height="689.286" preserveAspectRatio="none" filter="url(#vision-ocean-ripple)"/></g>
-                  <g class="vision-offshore-foam" fill="none" stroke="#d6ffff" stroke-width="1.3" stroke-linecap="round">
-                    <path class="vision-wavelet" d="M12 254Q35 246 57 254T101 254T143 254"/>
-                    <path class="vision-wavelet second" d="M-8 293Q16 286 40 293T86 293T131 293"/>
-                    <path class="vision-wavelet third" d="M15 386Q37 377 59 386T102 386T146 386"/>
-                    <path class="vision-wavelet" d="M-13 432Q10 424 33 432T77 432T119 432"/>
-                    <path class="vision-wavelet second" d="M-4 494Q17 487 38 494T81 494"/>
-                    <path class="vision-wavelet third" d="M-5 562Q17 555 39 562T82 562"/>
-                    <path class="vision-wavelet" d="M-7 623Q13 616 33 623T72 623"/>
-                  </g>
-                  <path class="vision-coastal-surf" d="M-5 235C51 226 113 233 155 250C161 262 145 271 144 283M154 360C179 370 165 391 157 407C149 425 121 435 101 439M96 482C83 502 82 518 92 539C105 561 92 591 80 615C62 642 27 647-3 660" fill="none" stroke="#edffff" stroke-width="2.7" stroke-linecap="round"/>
                 </g>
-                <image class="vision-wind-clean-plate" href="assets/green-methanol-wind-clean.png" width="1000" height="689.286" preserveAspectRatio="none" mask="url(#vision-wind-cleanup)"/>
+                <image class="vision-wind-clean-plate" href="assets/green-methanol-wind-shadowless.png" width="1000" height="689.286" preserveAspectRatio="none" mask="url(#vision-wind-cleanup)"/>
                 <g class="vision-wind-farm"><svg class="vision-turbine-plane" x="319" y="107" width="66" height="66" viewBox="0 0 100 100" overflow="visible" data-turbine="coastal"><g class="vision-turbine-rotor" style="--rotor-speed:9.5s;--rotor-delay:-1.2s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="406" y="83" width="70" height="70" viewBox="0 0 100 100" overflow="visible" data-turbine="midwest"><g class="vision-turbine-rotor" style="--rotor-speed:10.8s;--rotor-delay:-4.1s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="481" y="73" width="62" height="62" viewBox="0 0 100 100" overflow="visible" data-turbine="middle"><g class="vision-turbine-rotor" style="--rotor-speed:8.8s;--rotor-delay:-2.5s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="554" y="43" width="72" height="72" viewBox="0 0 100 100" overflow="visible" data-turbine="mideast"><g class="vision-turbine-rotor" style="--rotor-speed:11.4s;--rotor-delay:-6.3s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="630" y="13" width="72" height="72" viewBox="0 0 100 100" overflow="visible" data-turbine="summit"><g class="vision-turbine-rotor" style="--rotor-speed:9.8s;--rotor-delay:-3.7s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg></g>
                 <image href="assets/green-methanol-vision.png" width="1000" height="689.286" preserveAspectRatio="none" clip-path="url(#vision-wind-label)"/>
 
-                <path class="vision-flow power" d="M660 88C638 143 616 185 585 224"/>
-                <path class="vision-flow power" d="M805 409C744 401 682 399 621 415"/>
-                <path class="vision-flow power" d="M520 460C439 481 356 529 281 586"/>
-                <path class="vision-flow carbon" d="M410 326C386 303 365 282 361 255"/>
-                <path class="vision-flow carbon" d="M390 248C431 243 473 240 511 238"/>
-                <path class="vision-flow carbon" d="M610 242C644 243 674 244 701 250"/>
-                <path class="vision-flow hydrogen" d="M257 589C326 606 395 628 466 637"/>
-                <path class="vision-flow hydrogen" d="M596 617C655 604 704 589 745 580"/>
-                
-                
-                
+                <path class="vision-flow water" data-flow="ocean-intake" d="M156 270L198 270"/>
+                <path class="vision-flow water" data-flow="ocean-return" d="M199 311L150 311"/>
+                <path class="vision-flow water" data-flow="plant-ocean-water" d="M298 372L284 318"/>
+                <path class="vision-flow water" data-flow="electrolysis-water-intake" d="M73 635L104 642"/>
+                <path class="vision-flow water" data-flow="water-feed-to-plant" d="M222 557L244 475"/>
+                <path class="vision-flow water" data-flow="electrolysis-inlet" d="M207 615L265 582"/>
+                <path class="vision-flow water" data-flow="electrolysis-outlet" d="M256 605L218 630"/>
+                <path class="vision-flow carbon" data-flow="plant-co2-storage" d="M303 370L333 284"/>
+                <path class="vision-flow carbon" data-flow="co2-ocean-storage" d="M342 245L286 257"/>
+                <path class="vision-flow carbon" data-flow="capture-co2-storage" d="M406 314L364 279"/>
+                <path class="vision-flow flue" data-flow="flue-gas-capture" d="M353 340C354 326 364 317 391 314"/>
+                <path class="vision-flow carbon" data-flow="co2-methanol-synthesis" d="M430 235L485 232"/>
+                <path class="vision-flow power" data-flow="methanol-storage-feed" d="M646 205C651 218 653 235 655 255"/>
+                <path class="vision-flow product" data-flow="methanol-to-demand" d="M746 244L791 250"/>
+                <path class="vision-flow power" data-flow="power-plant-ai" d="M413 393L465 393"/>
+                <path class="vision-flow power" data-flow="ai-carbon-capture" d="M511 374L491 348"/>
+                <path class="vision-flow power" data-flow="ai-methanol-synthesis" d="M543 329C537 321 535 310 533 300"/>
+                <path class="vision-flow power" data-flow="ai-end-use" d="M679 324L713 309"/>
+                <path class="vision-flow power" data-flow="solar-ai" d="M725 412L666 400"/>
+                <path class="vision-flow power" data-flow="fuel-cell-ai" d="M693 501L666 466"/>
+                <path class="vision-flow power" data-flow="ai-electrolysis" d="M429 484L395 508"/>
+                <path class="vision-flow hydrogen" data-flow="electrolysis-hydrogen-storage" d="M281 603C329 616 377 627 419 636"/>
+                <path class="vision-flow hydrogen" data-flow="hydrogen-storage-fuel-cell" d="M635 585L676 576"/>
                 <circle class="vision-ai-ring" cx="554" cy="416" r="36"/>
                 <polygon class="vision-solar-glint" points="785,371 919,417 875,447 738,403"/>
               </svg>
@@ -101,11 +103,61 @@
           </div>
           <div class="vision-tooltip" id="vision-tooltip" role="tooltip" hidden><strong class="vision-tooltip-title"></strong><p class="vision-tooltip-text"></p></div>
         </div>
-        <div class="vision-legend" aria-label="Animated connections"><span><i aria-hidden="true"></i>Power connections</span><span><i class="carbon" aria-hidden="true"></i>Carbon pathways</span><span><i class="hydrogen" aria-hidden="true"></i>Hydrogen pathways</span></div>
+        <div class="vision-legend" aria-label="Animated connections"><span><i aria-hidden="true"></i>Power connections</span><span><i class="carbon" aria-hidden="true"></i>Carbon pathways</span><span><i class="hydrogen" aria-hidden="true"></i>Hydrogen pathways</span><span><i class="water" aria-hidden="true"></i>Water connections</span></div>
         <div class="vision-detail" id="vision-detail" role="status" aria-live="polite" aria-atomic="true"><span class="vision-detail-number" aria-hidden="true">11</span><div><h3 id="vision-detail-title">AI control system</h3><p id="vision-detail-text">AI-assisted monitoring and optimisation coordinate electricity supply, carbon capture, hydrogen production, storage and end-use demand across the system.</p></div></div>
         <div class="vision-modules" role="group" aria-label="Choose a module to keep its explanation open"></div>
         <div class="vision-definitions sr-only"></div>
         <figcaption class="vision-caption" id="vision-caption"><div class="vision-caption-title">A systems-level vision for an AI-enabled, renewable-driven and carbon-capture-integrated green methanol economy.</div><p>Animated flows illustrate system connections. Original figure supplied by Yuanjing Zhao.</p><p>Reference: Zhao et al. (2026). <em>From Thermal to Electrochemical CO₂-to-Methanol Conversion: A Comprehensive Review of Process Technologies, Techno-Economics, and Life-Cycle Performance.</em> Carbon Capture Science &amp; Technology.<br><a href="https://doi.org/10.1016/j.ccst.2026.100603" target="_blank" rel="noopener noreferrer">DOI: 10.1016/j.ccst.2026.100603 ↗</a></p></figcaption>
+      </figure>
+    </section>
+    <section class="section wrap methanol-assessment" id="multiscale-assessment" aria-labelledby="assessment-title">
+      <div class="section-heading vision-heading"><div><div class="eyebrow section-index">MULTISCALE ASSESSMENT / INTERACTIVE</div><h2 id="assessment-title">From process physics<br><em>to system decisions.</em></h2></div><p class="section-description">Linking physics-based models and symbolic regression with technical, economic and life-cycle assessment in the UK energy system.</p></div>
+      <figure class="vision-figure assessment-figure" aria-labelledby="assessment-title assessment-caption">
+        <div class="vision-toolbar"><p>Explore 10 linked modules.<br>Hover for an explanation. Click to select.</p><a class="vision-molecule-link" href="#methanol-vision">Systems vision ↑</a><button type="button" class="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
+        <p class="vision-mobile-hint">Swipe across the diagram, or select a module below.</p>
+        <div class="vision-stage">
+          <div class="vision-map-scroll" tabindex="0" role="group" aria-label="Multiscale methanol assessment figure; scroll horizontally on small screens">
+            <div class="vision-map assessment-map" data-motion="playing">
+              <img src="assets/multiscale-methanol-assessment.png" alt="A multiscale modelling framework linking a physics-based model and symbolic-regression surrogate at process scale with CO₂ electrolysis, water electrolysis, renewable electricity and methanol production at system scale, evaluated through performance, techno-economic analysis and life-cycle assessment." width="1315" height="1196" loading="lazy">
+              <svg class="vision-animation assessment-animation" viewBox="0 0 1315 1196" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="assessment-scan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9cfaff" stop-opacity="0"/><stop offset=".5" stop-color="#9cfaff" stop-opacity=".5"/><stop offset="1" stop-color="#9cfaff" stop-opacity="0"/></linearGradient>
+                  <clipPath id="assessment-physics-clip"><path d="M377 238L483 180L488 307L376 376Z"/></clipPath>
+                  <clipPath id="assessment-solar-clip"><path d="M151 974L180 930L278 949L246 995Z"/></clipPath>
+                  <clipPath id="assessment-binary-clip"><path d="M482 318L649 259L669 315L513 379Z"/></clipPath>
+                </defs>
+                <g clip-path="url(#assessment-physics-clip)"><rect class="assessment-model-scan" x="363" y="170" width="32" height="220" fill="url(#assessment-scan)"/></g>
+                <path class="assessment-flow model" data-flow="physics-surrogate" d="M560 264L651 264"/>
+                <g clip-path="url(#assessment-binary-clip)" fill="#b5faff" font-family="monospace" font-size="12"><text class="assessment-binary" x="505" y="338">0 1 0 1 1 0</text><text class="assessment-binary second" x="513" y="357">1 0 1 0 0 1</text></g>
+                <path class="assessment-flow model" data-flow="process-to-system" d="M577 449L577 492"/>
+                <path class="assessment-flow model" data-flow="system-to-process" d="M590 482L590 441"/>
+                <path class="assessment-flow model" data-flow="surrogate-system" d="M733 517L733 540M750 519L750 547M767 519L767 537"/>
+                <path class="assessment-flow feed" data-flow="co2-feed" d="M127 650L212 659"/>
+                <path class="assessment-flow feed" data-flow="water-feed" d="M119 807L185 814"/>
+                <path class="assessment-flow co" data-flow="co-methanol" d="M536 787L587 792M645 796C680 799 686 803 677 827S662 856 686 861"/>
+                <path class="assessment-flow hydrogen" data-flow="hydrogen-methanol" d="M537 876L573 882M625 885L650 889"/>
+                <path class="assessment-flow electricity" data-flow="solar-co2-electrolysis" d="M231 945L244 919L263 915L275 895"/>
+                <path class="assessment-flow electricity" data-flow="renewables-water-electrolysis" d="M264 982C315 991 391 1007 410 998S461 946 487 911"/>
+                <path class="assessment-flow outcome" data-flow="system-performance" d="M993 753L1008 756Q1028 756 1027 731L1027 512Q1027 476 1066 477"/>
+                <path class="assessment-flow outcome" data-flow="system-tea" d="M1027 754Q1030 714 1066 714"/>
+                <path class="assessment-flow outcome" data-flow="system-lca" d="M1027 754L1027 918Q1027 954 1067 954"/>
+                <g class="assessment-network" fill="#c8fcff" stroke="#abf7ff" stroke-width="1.8"><path fill="none" d="M767 229L754 270L790 269L767 229M754 270L769 304L790 269L803 307M769 304L758 331"/><circle class="assessment-node" cx="767" cy="229" r="4"/><circle class="assessment-node second" cx="754" cy="270" r="4"/><circle class="assessment-node third" cx="790" cy="269" r="4"/><circle class="assessment-node" cx="769" cy="304" r="4"/><circle class="assessment-node second" cx="803" cy="307" r="4"/><circle class="assessment-node third" cx="758" cy="331" r="4"/></g>
+                <g clip-path="url(#assessment-solar-clip)"><rect class="assessment-solar-shimmer" x="120" y="920" width="24" height="100" fill="url(#assessment-scan)"/></g>
+                <path class="assessment-electric-pulse" d="M493 709L479 736L500 734L484 762" fill="none" stroke="#fff0a8" stroke-width="3" stroke-linejoin="round"/>
+                <ellipse class="assessment-result-ring" cx="1181" cy="486" rx="96" ry="106"/>
+                <ellipse class="assessment-result-ring second" cx="1182" cy="727" rx="96" ry="106"/>
+                <ellipse class="assessment-result-ring third" cx="1183" cy="971" rx="96" ry="106"/>
+              </svg>
+              <div class="vision-hotspots" role="group" aria-label="Explore multiscale assessment modules"></div>
+            </div>
+          </div>
+          <div class="vision-tooltip" role="tooltip" hidden><strong class="vision-tooltip-title"></strong><p class="vision-tooltip-text"></p></div>
+        </div>
+        <div class="vision-legend assessment-legend"><span><i aria-hidden="true"></i>Models &amp; information</span><span><i class="carbon" aria-hidden="true"></i>CO &amp; H₂ pathways</span><span><i class="water" aria-hidden="true"></i>Renewable electricity</span></div>
+        <div class="vision-detail" id="assessment-detail" role="status" aria-live="polite" aria-atomic="true"><span class="vision-detail-number" aria-hidden="true">01</span><div><h3 class="vision-detail-title">Physics-based process model</h3><p class="vision-detail-text">A physics-based model describes the electrochemical process and supplies data for a compact surrogate.</p></div></div>
+        <div class="vision-modules" role="group" aria-label="Choose a multiscale assessment module"></div>
+        <div class="vision-definitions sr-only"></div>
+        <figcaption class="vision-caption" id="assessment-caption"><div class="vision-caption-title">Electrified carbon-neutral methanol production: a multiscale techno-economic-environmental assessment.</div><p>Animated connections illustrate the modelling and assessment workflow. Original figure supplied by Yuanjing Zhao.</p><p><strong>Zhao, Y.</strong>; Wang, S.; Leonzio, G.; Xuan, J.; Yin, H.; Xing, L. Electrified Carbon-Neutral Methanol Production Pathways: A Multiscale Techno-Economic-Environmental Assessment Based on the UK Energy System. <em>Adv. Chem. Eng.</em> <strong>2026</strong>, e70009.<br><a href="https://doi.org/10.1002/ache.70009" target="_blank" rel="noopener noreferrer">DOI: 10.1002/ache.70009 ↗</a></p></figcaption>
       </figure>
     </section>
     <section class="section wrap" id="research" aria-labelledby="research-title">

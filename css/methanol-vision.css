@@ -74,13 +74,40 @@
 .vision-turbine-rotor{transform-box:view-box;transform-origin:50% 50%;animation:vision-turbine-clockwise var(--rotor-speed,10s) linear infinite;animation-delay:var(--rotor-delay,0s)}
 .vision-ocean-swell{animation:vision-ocean-swell 6.4s ease-in-out infinite;transform-origin:left center}
 .vision-ocean-texture{opacity:.94}
-.vision-wavelet{stroke-dasharray:14 44;animation:vision-wave-crest 7.2s linear infinite;opacity:.55}
-.vision-wavelet.second{animation-delay:-2.4s;animation-duration:8.4s;opacity:.4}
-.vision-wavelet.third{animation-delay:-4.8s;animation-duration:9.2s;opacity:.48}
-.vision-coastal-surf{stroke-dasharray:25 19 9 37;animation:vision-coastal-surf 8s linear infinite;opacity:.64}
 @keyframes vision-turbine-clockwise{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes vision-ocean-swell{0%,100%{transform:translate(0,-1.5px)}30%{transform:translate(-1.8px,1px)}65%{transform:translate(.9px,3px)}}
-@keyframes vision-wave-crest{from{stroke-dashoffset:0;transform:translateY(0)}to{stroke-dashoffset:-174;transform:translateY(3px)}}
-@keyframes vision-coastal-surf{0%{stroke-dashoffset:0;opacity:.42}50%{opacity:.79}100%{stroke-dashoffset:-180;opacity:.42}}
 @media(max-width:760px){.vision-toolbar{flex-wrap:wrap;gap:13px 15px}.vision-toolbar p{flex:1;min-width:170px}.vision-molecule-link{font-size:13px;order:3;width:100%;margin:0}.vision-motion-toggle{margin-left:auto}}
-@media(prefers-reduced-motion:reduce){.vision-turbine-rotor,.vision-ocean-swell,.vision-wavelet,.vision-coastal-surf{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.vision-turbine-rotor,.vision-ocean-swell{animation:none!important}}
+
+/* Every printed arrow has its own animated connection; sea motion uses texture only. */
+.vision-flow.water{stroke:#d8f9ff;filter:drop-shadow(0 0 2px #2085b8);animation-duration:4s}
+.vision-flow.flue{stroke:#ffe7ab;animation-duration:3.4s}
+.vision-flow.product{stroke:#f1fbff;animation-duration:4.3s}
+.vision-legend .water{background:#3a9bc3}
+.methanol-assessment{padding-top:30px;padding-bottom:92px}
+.assessment-figure{max-width:1120px;margin-inline:auto}
+.assessment-map{aspect-ratio:1315/1196;background:#fff}
+.assessment-flow{fill:none;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:3 17;animation:assessment-flow 3.8s linear infinite;opacity:.94}
+.assessment-flow.model{stroke:#ddffff;filter:drop-shadow(0 0 2px #42bfe2)}
+.assessment-flow.feed{stroke:#f1ffff;animation-duration:3.2s}
+.assessment-flow.co{stroke:#c3ffff;animation-duration:4.2s}
+.assessment-flow.hydrogen{stroke:#efffc1;animation-duration:3.4s}
+.assessment-flow.electricity{stroke:#f0ffff;animation-duration:3s;filter:drop-shadow(0 0 3px #12c7e1)}
+.assessment-flow.outcome{stroke:#c5faff;stroke-width:2.5;animation-duration:5s}
+.assessment-model-scan{animation:assessment-model-scan 6s ease-in-out infinite}
+.assessment-binary{animation:assessment-data 5s linear infinite;opacity:.85}
+.assessment-binary.second{animation-delay:-2.5s}
+.assessment-network{opacity:.7}
+.assessment-node{animation:assessment-node 3.6s ease-in-out infinite}
+.assessment-node.second{animation-delay:-1.2s}.assessment-node.third{animation-delay:-2.4s}
+.assessment-solar-shimmer{animation:assessment-solar 7s linear infinite}
+.assessment-electric-pulse{animation:assessment-node 2.4s ease-in-out infinite}
+.assessment-result-ring{fill:none;stroke:#24b9c6;stroke-width:1.7;stroke-dasharray:8 15;animation:assessment-flow 14s linear infinite;opacity:.45}
+.assessment-result-ring.second{animation-delay:-4.6s}.assessment-result-ring.third{animation-delay:-9.2s}
+@keyframes assessment-flow{to{stroke-dashoffset:-200}}
+@keyframes assessment-model-scan{0%,12%{transform:translateX(-30px);opacity:0}28%{opacity:.7}72%{opacity:.7}90%,100%{transform:translateX(130px);opacity:0}}
+@keyframes assessment-data{from{transform:translate(0,0);opacity:0}20%,70%{opacity:.85}to{transform:translate(75px,-35px);opacity:0}}
+@keyframes assessment-node{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes assessment-solar{0%,15%{transform:translateX(-10px);opacity:0}30%,60%{opacity:.7}85%,100%{transform:translateX(170px);opacity:0}}
+@media(max-width:760px){.methanol-assessment{padding-top:0;padding-bottom:64px}.assessment-map{min-width:900px}}
+@media(prefers-reduced-motion:reduce){.assessment-animation *{animation:none!important}.assessment-model-scan,.assessment-solar-shimmer,.assessment-binary{opacity:0}}
