@@ -29,11 +29,11 @@
     toast(copied ? message : 'Automatic copying was blocked. Select the text and copy it manually.');return copied;
   }
 
-  // Only confirmed public links are shown; CV/GitHub are absent until supplied.
+  // Public account links follow the Surrey profile; optional downloads stay hidden until supplied.
   all('[data-profile-link]').forEach(a=>{const value=content.links[a.dataset.profileLink];if(value)a.href=value;});
   $('contact-email').href=`mailto:${content.email}`;
   $('contact-email').firstChild.textContent=content.email+' ';
-  ['github','linkedin'].forEach(key=>{const a=$(key+'-link');if(content.links[key]){a.href=content.links[key];a.hidden=false;}});
+  ['github','linkedin'].forEach(key=>{const a=$(key+'-link');if(a&&content.links[key]){a.href=content.links[key];a.hidden=false;}});
   if(content.links.cv){$('cv-link').href=content.links.cv;$('cv-link').setAttribute('download','');$('cv-link').hidden=false;}
   $('copy-email').addEventListener('click',()=>copyText(content.email,'Email address copied.'));
 
@@ -55,7 +55,7 @@
   $('menu-toggle').addEventListener('click',()=>{const open=$('menu-toggle').getAttribute('aria-expanded')==='true';$('menu-toggle').setAttribute('aria-expanded',String(!open));$('menu-toggle').setAttribute('aria-label',open?'Open navigation':'Close navigation');$('mobile-nav').hidden=open;});
   all('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{$('mobile-nav').hidden=true;$('menu-toggle').setAttribute('aria-expanded','false');$('menu-toggle').setAttribute('aria-label','Open navigation');}));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('mobile-nav').hidden){$('mobile-nav').hidden=true;$('menu-toggle').setAttribute('aria-expanded','false');$('menu-toggle').setAttribute('aria-label','Open navigation');$('menu-toggle').focus();}});
-  const navLinks=all('.desktop-nav a'), sectionIDs=['research','playground','publications','about'];let scrollPending=false;
+  const navLinks=all('.desktop-nav a'), sectionIDs=['research','playground','publications','about','teaching'];let scrollPending=false;
   function updateScroll(){const max=document.documentElement.scrollHeight-innerHeight;document.querySelector('.reading-progress').style.width=(max>0?scrollY/max*100:0)+'%';let active='';sectionIDs.forEach(id=>{if($(id).getBoundingClientRect().top<=180)active=id;});navLinks.forEach(a=>{const current=a.getAttribute('href')==='#'+active;a.classList.toggle('is-current',current);if(current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});scrollPending=false;}
   addEventListener('scroll',()=>{if(!scrollPending){scrollPending=true;requestAnimationFrame(updateScroll);}},{passive:true});updateScroll();
   if('IntersectionObserver'in window&&!reducedMotion.matches){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('is-pending');observer.unobserve(entry.target);}}),{threshold:.08});all('.section-heading,.research-card,.about-copy').forEach(el=>{el.classList.add('reveal','is-pending');observer.observe(el);});}
@@ -71,7 +71,7 @@
   command.querySelector('.command-close').addEventListener('click',()=>command.close());
   function showProject(id){const p=content.projects.find(p=>p.id===id);if(!p)return;
     $('detail-dialog-eyebrow').textContent=`RESEARCH NOTE ${p.number} / ${p.category}`;
-    $('detail-dialog-body').innerHTML=`<span class="dialog-status">${escapeHTML(p.status)}</span><h2 id="detail-dialog-title">${escapeHTML(p.title)}</h2><p>${escapeHTML(p.overview)}</p><div class="project-question">${escapeHTML(p.question)}</div><h3>Methods & perspective</h3><div class="dialog-tags">${p.methods.map(m=>`<span>${escapeHTML(m)}</span>`).join('')}</div><a class="button button-primary project-detail-link" href="${escapeHTML(p.link)}" ${p.link.startsWith('https:')?'target="_blank" rel="noopener noreferrer"':''}>${escapeHTML(p.linkText)} <span aria-hidden="true">↗</span></a><p class="dialog-source">Research context: <a href="${escapeHTML(p.source)}" target="_blank" rel="noopener noreferrer">University of Surrey profile</a>. This site presents a selected overview, not a full publication record.</p>`;
+    $('detail-dialog-body').innerHTML=`<span class="dialog-status">${escapeHTML(p.status)}</span><h2 id="detail-dialog-title">${escapeHTML(p.title)}</h2><p>${escapeHTML(p.overview)}</p><div class="project-question">${escapeHTML(p.question)}</div><h3>Methods & perspective</h3><div class="dialog-tags">${p.methods.map(m=>`<span>${escapeHTML(m)}</span>`).join('')}</div><a class="button button-primary project-detail-link" href="${escapeHTML(p.link)}" ${p.link.startsWith('https:')?'target="_blank" rel="noopener noreferrer"':''}>${escapeHTML(p.linkText)} <span aria-hidden="true">↗</span></a><p class="dialog-source">Research context: <a href="${escapeHTML(p.source)}" target="_blank" rel="noopener noreferrer">University of Surrey profile</a>. The complete publication and manuscript list from that profile appears in the publications section.</p>`;
     detail.querySelector('.project-detail-link')?.addEventListener('click',()=>{if(p.link.startsWith('#'))detail.close();});openDialog(detail);
   }
   all('[data-project]').forEach(button=>button.addEventListener('click',()=>showProject(button.dataset.project)));
@@ -126,15 +126,20 @@
   window.PORTFOLIO_DEMO={data:demoData,get result(){return result;},get view(){return chart.view;},get inspectedId(){return inspectedId;}};
 
   // Publications and citation tools.
-  function renderPublications(filter='all'){const papers=content.publications.filter(p=>filter==='all'||p.type===filter);
-    $('publication-list').innerHTML=papers.map(p=>`<article class="publication-row"><div class="publication-year">${p.year}<span class="publication-type">${escapeHTML(p.label)}</span></div><div class="publication-body"><h3><a href="https://doi.org/${escapeHTML(p.doi)}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)}</a></h3><p class="publication-authors">${escapeHTML(p.authors)}</p><p class="publication-journal">${escapeHTML(p.journal)}</p><p class="publication-note">${escapeHTML(p.note)}</p></div><div class="publication-actions"><a href="https://doi.org/${escapeHTML(p.doi)}" target="_blank" rel="noopener noreferrer" aria-label="Read ${escapeHTML(p.title)} at the publisher">Read paper ↗</a><button data-cite="${p.id}" aria-label="Cite ${escapeHTML(p.title)}">Cite ⧉</button></div></article>`).join('');
-    $('publication-count').textContent=`${papers.length} SELECTED ${papers.length===1?'PAPER':'PAPERS'}`;
+  function renderPublications(filter='all'){const papers=content.publications.filter(p=>filter==='all'||p.status===filter);
+    $('publication-list').innerHTML=papers.map(p=>{
+      const review=p.status==='under-review';
+      const linkLabel=review?'Surrey listing':p.type==='conference'?'Conference book':'Read paper';
+      const venue=review?'Submitted to '+p.journal+' · Under review':p.journal;
+      return `<article class="publication-row${review?' is-under-review':''}" data-publication="${escapeHTML(p.id)}"><div class="publication-year">${p.year||'—'}<span class="publication-type">${escapeHTML(p.label)}</span></div><div class="publication-body"><h3>${review?escapeHTML(p.title):`<a href="${escapeHTML(p.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)}</a>`}</h3><p class="publication-authors">${escapeHTML(p.authors)}</p><p class="publication-journal">${escapeHTML(venue)}</p>${p.note?`<p class="publication-note">${escapeHTML(p.note)}</p>`:''}</div><div class="publication-actions"><a href="${escapeHTML(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(linkLabel+': '+p.title)}">${linkLabel} ↗</a><button data-cite="${escapeHTML(p.id)}" aria-label="Cite ${escapeHTML(p.title)}">Cite ⧉</button></div></article>`;
+    }).join('');
+    $('publication-count').textContent=`${papers.length} ${papers.length===1?'RECORD':'RECORDS'}`;
     all('[data-filter]').forEach(b=>{const active=b.dataset.filter===filter;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active));});
   }
   all('[data-filter]').forEach(b=>b.addEventListener('click',()=>renderPublications(b.dataset.filter)));renderPublications();
   function showCitation(id){const p=content.publications.find(p=>p.id===id);if(!p)return;let format='plain';
-    const plain=`${p.authors} (${p.year}). ${p.title}. ${p.journal}. https://doi.org/${p.doi}`;
-    $('detail-dialog-eyebrow').textContent='REFERENCE TOOLS / '+p.year;
+    const plain=p.citation;
+    $('detail-dialog-eyebrow').textContent='REFERENCE TOOLS / '+(p.year||'UNDER REVIEW');
     $('detail-dialog-body').innerHTML=`<h2 id="detail-dialog-title">Take the reference<br>with you.</h2><p>${escapeHTML(p.journal)}</p><div class="citation-tabs" role="group" aria-label="Citation format"><button data-format="plain" class="is-active" aria-pressed="true">Plain text</button><button data-format="bibtex" aria-pressed="false">BibTeX</button></div><pre class="citation-text" id="citation-text"></pre><div class="citation-actions"><button class="button button-primary" id="copy-citation">Copy citation <span aria-hidden="true">⧉</span></button><button class="button" id="download-citation">Download .bib <span aria-hidden="true">↓</span></button></div>`;
     $('citation-text').textContent=plain;
     detail.querySelectorAll('[data-format]').forEach(b=>b.addEventListener('click',()=>{format=b.dataset.format;$('citation-text').textContent=format==='bibtex'?p.bibtex:plain;detail.querySelectorAll('[data-format]').forEach(other=>{other.classList.toggle('is-active',other===b);other.setAttribute('aria-pressed',String(other===b));});}));
@@ -143,8 +148,8 @@
   }
   $('publication-list').addEventListener('click',e=>{const b=e.target.closest('[data-cite]');if(b)showCitation(b.dataset.cite);});
   $('prototype-info').addEventListener('click',()=>{
-    $('detail-dialog-eyebrow').textContent='PROTOTYPE 01 / CONTENT & PRIVACY';
-    $('detail-dialog-body').innerHTML='<h2 id="detail-dialog-title">A considered first draft.</h2><p>This interactive academic portfolio was prepared on 26 October 2026. This prototype is published as an interactive demonstration on GitHub Pages.</p><h3>What is real?</h3><p>The academic identity, public contact address, research context and two selected publication records are based on the University of Surrey profile and publisher metadata. Education is presented without dates pending the final CV.</p><h3>What is illustrative?</h3><p>The methanol geometry is a visual model, not a molecular simulation. The process pathways omit recycle, balances and detailed equipment. All 91 design points and their objective indices are synthetic. TOPSIS ranking is computed locally using the displayed preferences.</p><h3>What is not included yet?</h3><p>Your final CV, portrait, confirmed GitHub link and author-approved research datasets. No private correspondence, unpublished numerical results or manuscript submission identifiers are included.</p><h3>Privacy & accessibility</h3><p>No analytics, cookies, external fonts or third-party scripts are used. Theme and motion preferences are stored locally in your browser. The page supports keyboard navigation, reduced motion and small screens. Outbound links open the relevant external websites.</p><p class="dialog-source">Sources: <a href="https://www.surrey.ac.uk/people/yuanjing-jason-zhao" target="_blank" rel="noopener noreferrer">Surrey profile</a> · <a href="https://doi.org/10.1002/ache.70009" target="_blank" rel="noopener noreferrer">Methanol research article</a> · <a href="https://doi.org/10.1016/j.ccst.2026.100603" target="_blank" rel="noopener noreferrer">Methanol review</a>.</p>';
+    $('detail-dialog-eyebrow').textContent='PROFILE / CONTENT & SOURCES';
+    $('detail-dialog-body').innerHTML='<h2 id="detail-dialog-title">Profile &amp; sources.</h2><p>This portfolio reproduces the personal profile information listed on the University of Surrey page, captured on 26 October 2026: biography, qualifications, memberships, departments, research, teaching, sustainable development goals, contact information, account links and all 11 publication and manuscript records.</p><p>Publication and review status follow that source. Manuscripts marked under review are not presented as accepted publications. Years not provided by the source remain unspecified. The profile photograph is taken from the same Surrey page.</p><h3>The interactive playground</h3><p>The methanol geometry and process pathways are illustrations. All 91 design points and their objective indices are synthetic. TOPSIS is computed locally from the displayed preferences; this demonstration does not reproduce research results.</p><h3>Privacy &amp; accessibility</h3><p>No analytics, tracking cookies, external fonts or third-party scripts are used. Theme and motion preferences are stored in your browser. The page supports keyboard navigation, reduced motion and small screens.</p><p class="dialog-source">Source: <a href="https://www.surrey.ac.uk/people/yuanjing-jason-zhao" target="_blank" rel="noopener noreferrer">Yuanjing (Jason) Zhao · University of Surrey ↗</a></p>';
     openDialog(detail);
   });
 
@@ -152,8 +157,10 @@
   const commands=[
     {label:'Explore the research',hint:'SECTION 01',keywords:'research methanol electrochemistry',run:()=>goTo('research')},
     {label:'Open the interactive playground',hint:'SECTION 02',keywords:'playground demo interactive topsis pareto',run:()=>goTo('playground')},
-    {label:'Browse selected publications',hint:'SECTION 03',keywords:'papers publications articles writing',run:()=>goTo('publications')},
+    {label:'Browse all publications and manuscripts',hint:'SECTION 03',keywords:'papers publications articles writing under review conference',run:()=>goTo('publications')},
     {label:'Meet the researcher',hint:'SECTION 04',keywords:'about cv biography education researcher',run:()=>goTo('about')},
+    {label:'Teaching and maths support',hint:'SECTION 05',keywords:'teaching courses assistant maths support',run:()=>goTo('teaching')},
+    {label:'Sustainable development goals',hint:'SECTION 06',keywords:'sustainability sdg sustainable development goals',run:()=>goTo('sustainability')},
     {label:'Start a conversation',hint:'CONTACT',keywords:'contact email collaboration',run:()=>goTo('contact')},
     {label:'Switch daylight / dusk',hint:'APPEARANCE',keywords:'theme dark light daylight dusk mode',run:toggleTheme},
     {label:'Pause / play motion',hint:'ACCESSIBILITY',keywords:'motion pause animation reduced accessibility',run:()=>setMotion(!hero.running)},
