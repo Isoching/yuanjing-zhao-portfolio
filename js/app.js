@@ -76,24 +76,7 @@
   }
   all('[data-project]').forEach(button=>button.addEventListener('click',()=>showProject(button.dataset.project)));
 
-  // Pathway explorer. This is a schematic; no flows, performance values or balances are implied.
-  let activeRoute='two',activeNode=0;
-  function chooseNode(index){const route=content.routes[activeRoute];if(index<0||index>=route.nodes.length)return;activeNode=index;
-    $('route-detail-number').textContent=String(index+1).padStart(2,'0');$('route-detail-title').textContent=route.nodes[index].name;$('route-detail-text').textContent=route.nodes[index].text;
-    all('#route-svg .route-node').forEach((n,i)=>{n.classList.toggle('is-active',i===index);n.setAttribute('aria-pressed',String(i===index));});
-  }
-  function renderRoute(key){activeRoute=key;activeNode=0;const route=content.routes[key],xs=[18,242,466,690],nodeWidth=174,y=109,midY=147;
-    const auxIndex=key==='conventional'?1:2,auxX=xs[auxIndex]+nodeWidth/2;
-    let markup=`<title>${escapeHTML(route.label)}</title><defs><marker id="route-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="var(--accent)"/></marker></defs>`;
-    markup+=`<rect x="${auxX-153}" y="26" width="306" height="29" rx="3" fill="var(--sage)"/><text class="route-aux" x="${auxX}" y="44">${escapeHTML(route.auxiliary)}</text><path class="route-connector route-animated" d="M${auxX} 55V104" marker-end="url(#route-arrow)"/>`;
-    xs.forEach((x,i)=>{const n=route.nodes[i];if(i<3)markup+=`<path class="route-connector route-animated" d="M${x+nodeWidth} ${midY}H${xs[i+1]-7}" marker-end="url(#route-arrow)"/>`;markup+=`<g class="route-node${i===0?' is-active':''}" data-node="${i}" role="button" tabindex="0" aria-label="${escapeHTML(n.name)}: show process explanation" aria-pressed="${i===0}"><rect x="${x}" y="${y}" width="${nodeWidth}" height="76" rx="3"/><text class="node-no" x="${x+14}" y="${y+19}">0${i+1}</text><text class="node-name" text-anchor="middle" x="${x+nodeWidth/2}" y="${y+42}">${escapeHTML(n.name)}</text><text class="node-sub" text-anchor="middle" x="${x+nodeWidth/2}" y="${y+59}">${escapeHTML(n.sub)}</text></g>`;});
-    markup+=`<path class="route-connector route-animated" d="M864 ${midY}H904" marker-end="url(#route-arrow)"/><text class="route-product" x="941" y="152">CH₃OH</text><text class="route-aux" x="941" y="172" style="font-size:7px">METHANOL</text>`;
-    $('route-svg').innerHTML=markup;$('route-note').textContent=route.note+' Select a unit to explore its role.';
-    all('[data-route]').forEach(b=>{const selected=b.dataset.route===key;b.classList.toggle('is-active',selected);b.setAttribute('aria-pressed',String(selected));});chooseNode(0);
-  }
-  $('route-svg').addEventListener('click',e=>{const target=e.target.closest('[data-node]');if(target)chooseNode(Number(target.dataset.node));});
-  $('route-svg').addEventListener('keydown',e=>{const target=e.target.closest('[data-node]');if(!target)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();chooseNode(Number(target.dataset.node));}if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();const next=(Number(target.dataset.node)+(e.key==='ArrowRight'?1:3))%4;chooseNode(next);all('#route-svg [data-node]')[next].focus();}});
-  all('[data-route]').forEach(b=>b.addEventListener('click',()=>renderRoute(b.dataset.route)));renderRoute('two');
+  // Source-figure pathway interactions are initialised in process-pathways.js.
 
   // Working TOPSIS explorer.
   const demoData=window.PortfolioViz.makeDemoData();let result,inspectedId=null;
@@ -149,7 +132,7 @@
   $('publication-list').addEventListener('click',e=>{const b=e.target.closest('[data-cite]');if(b)showCitation(b.dataset.cite);});
   $('prototype-info').addEventListener('click',()=>{
     $('detail-dialog-eyebrow').textContent='PROFILE / CONTENT & SOURCES';
-    $('detail-dialog-body').innerHTML='<h2 id="detail-dialog-title">Profile &amp; sources.</h2><p>This portfolio reproduces the personal profile information listed on the University of Surrey page, captured on 26 October 2026: biography, qualifications, memberships, departments, research, teaching, sustainable development goals, contact information, account links and all 11 publication and manuscript records.</p><p>Publication and review status follow that source. Manuscripts marked under review are not presented as accepted publications. Years not provided by the source remain unspecified. The profile photograph and CV were supplied by Yuanjing Zhao. The SDG images are the same original assets displayed on the Surrey profile.</p><h3>The interactive playground</h3><p>The methanol geometry and process pathways are illustrations. All 91 design points and their objective indices are synthetic. TOPSIS is computed locally from the displayed preferences; this demonstration does not reproduce research results.</p><h3>Privacy &amp; accessibility</h3><p>No analytics, tracking cookies, external fonts or third-party scripts are used. Theme and motion preferences are stored in your browser. The page supports keyboard navigation, reduced motion and small screens.</p><p class="dialog-source">Source: <a href="https://www.surrey.ac.uk/people/yuanjing-jason-zhao" target="_blank" rel="noopener noreferrer">Yuanjing (Jason) Zhao · University of Surrey ↗</a></p>';
+    $('detail-dialog-body').innerHTML='<h2 id="detail-dialog-title">Profile &amp; sources.</h2><p>This portfolio reproduces the personal profile information listed on the University of Surrey page, captured on 26 October 2026: biography, qualifications, memberships, departments, research, teaching, sustainable development goals, contact information, account links and all 11 publication and manuscript records.</p><p>Publication and review status follow that source. Manuscripts marked under review are not presented as accepted publications. Years not provided by the source remain unspecified. The profile photograph and CV were supplied by Yuanjing Zhao. The SDG images are the same original assets displayed on the Surrey profile.</p><h3>The interactive playground</h3><p>The methanol geometry is illustrative. The process explorer reproduces the review figure supplied by Yuanjing Zhao and links to its original reference. All 91 playground design points and their objective indices are synthetic. TOPSIS is computed locally from the displayed preferences; this demonstration does not reproduce research results.</p><h3>Privacy &amp; accessibility</h3><p>No analytics, tracking cookies, external fonts or third-party scripts are used. Theme and motion preferences are stored in your browser. The page supports keyboard navigation, reduced motion and small screens.</p><p class="dialog-source">Source: <a href="https://www.surrey.ac.uk/people/yuanjing-jason-zhao" target="_blank" rel="noopener noreferrer">Yuanjing (Jason) Zhao · University of Surrey ↗</a></p>';
     openDialog(detail);
   });
 
@@ -157,6 +140,7 @@
   const commands=[
     {label:'Explore the green methanol system',hint:'SYSTEMS VISION',keywords:'methanol systems vision ai renewable carbon capture interactive diagram',run:()=>goTo('methanol-vision')},
     {label:'Explore multiscale methanol assessment',hint:'MODELS & ASSESSMENT',keywords:'physics symbolic regression multiscale tea lca energy system assessment',run:()=>goTo('multiscale-assessment')},
+    {label:'Follow the methanol production pathways',hint:'REVIEW FLOW DIAGRAM',keywords:'process explorer direct two step hydrogenation fossil benchmark review figure',run:()=>goTo('process-explorer')},
     {label:'Explore the research',hint:'SECTION 01',keywords:'research methanol electrochemistry',run:()=>goTo('research')},
     {label:'Open the interactive playground',hint:'SECTION 02',keywords:'playground demo interactive topsis pareto',run:()=>goTo('playground')},
     {label:'Browse all publications and manuscripts',hint:'SECTION 03',keywords:'papers publications articles writing under review conference',run:()=>goTo('publications')},

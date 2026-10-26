@@ -111,3 +111,12 @@
 @keyframes assessment-solar{0%,15%{transform:translateX(-10px);opacity:0}30%,60%{opacity:.7}85%,100%{transform:translateX(170px);opacity:0}}
 @media(max-width:760px){.methanol-assessment{padding-top:0;padding-bottom:64px}.assessment-map{min-width:900px}}
 @media(prefers-reduced-motion:reduce){.assessment-animation *{animation:none!important}.assessment-model-scan,.assessment-solar-shimmer,.assessment-binary{opacity:0}}
+
+/* Widen the assessment figure horizontally while keeping its prior image height. */
+.assessment-figure{max-width:1280px;container-type:inline-size}
+.assessment-map{aspect-ratio:auto;width:calc(clamp(900px,100cqw,1118px)*1.1431127);height:calc(clamp(900px,100cqw,1118px)*1196/1315)}
+.assessment-map>img{object-fit:fill}
+/* Source alpha bounds: x=1..2476, y=0..1735 of the 2520x1737 original. */
+.system-map-frame{position:relative;min-width:900px;aspect-ratio:2476/1736;overflow:hidden}
+.system-map-frame>.vision-map{min-width:0;width:calc(100%*2520/2476);left:calc(-100%/2476)}
+@media print{.system-map-frame{min-width:0}.assessment-map{min-width:0;width:100%;height:auto;aspect-ratio:1503.2/1196}}

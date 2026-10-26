@@ -15,10 +15,12 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/methanol-vision.css">
+  <link rel="stylesheet" href="css/process-pathways.css">
   <script src="js/content.js" defer></script>
   <script src="js/visualisations.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/methanol-vision.js" defer></script>
+  <script src="js/process-pathways.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -44,7 +46,7 @@
         <p class="vision-mobile-hint">Swipe across the diagram, or choose a module below to read its explanation.</p>
         <div class="vision-stage">
           <div class="vision-map-scroll" tabindex="0" role="group" aria-label="Interactive green methanol systems figure; scroll horizontally on small screens">
-            <div class="vision-map" data-motion="playing">
+            <div class="system-map-frame"><div class="vision-map" data-motion="playing">
               <img src="assets/green-methanol-vision.png" alt="A renewable-driven green methanol system connecting wind and solar power, carbon capture and storage, electrolysis, hydrogen storage, methanol production, fuel cells, end-use demand and AI control." width="2520" height="1737" loading="lazy">
               <svg class="vision-animation" viewBox="0 0 1000 689.286" aria-hidden="true" focusable="false">
                 <defs>
@@ -99,7 +101,7 @@
                 <polygon class="vision-solar-glint" points="785,371 919,417 875,447 738,403"/>
               </svg>
               <div class="vision-hotspots" role="group" aria-label="Explore system modules"></div>
-            </div>
+            </div></div>
           </div>
           <div class="vision-tooltip" id="vision-tooltip" role="tooltip" hidden><strong class="vision-tooltip-title"></strong><p class="vision-tooltip-text"></p></div>
         </div>
@@ -119,7 +121,7 @@
           <div class="vision-map-scroll" tabindex="0" role="group" aria-label="Multiscale methanol assessment figure; scroll horizontally on small screens">
             <div class="vision-map assessment-map" data-motion="playing">
               <img src="assets/multiscale-methanol-assessment.png" alt="A multiscale modelling framework linking a physics-based model and symbolic-regression surrogate at process scale with CO₂ electrolysis, water electrolysis, renewable electricity and methanol production at system scale, evaluated through performance, techno-economic analysis and life-cycle assessment." width="1315" height="1196" loading="lazy">
-              <svg class="vision-animation assessment-animation" viewBox="0 0 1315 1196" aria-hidden="true" focusable="false">
+              <svg class="vision-animation assessment-animation" preserveAspectRatio="none" viewBox="0 0 1315 1196" aria-hidden="true" focusable="false">
                 <defs>
                   <linearGradient id="assessment-scan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9cfaff" stop-opacity="0"/><stop offset=".5" stop-color="#9cfaff" stop-opacity=".5"/><stop offset="1" stop-color="#9cfaff" stop-opacity="0"/></linearGradient>
                   <clipPath id="assessment-physics-clip"><path d="M377 238L483 180L488 307L376 376Z"/></clipPath>
@@ -168,7 +170,24 @@
         <button class="research-card card-carbon" data-project="carbon"><span class="card-topline"><span class="micro">CARBON & SYSTEMS THINKING</span><span class="card-number">03</span></span><span class="card-art" aria-hidden="true"><svg viewBox="0 0 350 170"><circle cx="100" cy="85" r="38" stroke-dasharray="2 5" opacity=".4"/><circle cx="100" cy="85" r="25"/><text class="big-svg-text" x="100" y="91">C</text><path class="flow-line" d="M125 85h35q12 0 12-12V42q0-12 12-12h69M125 85h128M125 85h35q12 0 12 12v31q0 12 12 12h69"/><path d="m246 25 7 5-7 5m0 45 7 5-7 5m0 45 7 5-7 5"/><text x="292" y="34">STORE</text><text x="290" y="89">FUEL</text><text x="297" y="144">REMAKE</text></svg></span><span class="card-copy"><span class="card-status">Perspective in development</span><h3>Look beyond<br>the molecule.</h3><span class="card-description">Carbon allocation across storage, fuels and circular chemicals.</span></span><span class="card-footer"><span>Explore the perspective</span><span class="circle-arrow" aria-hidden="true">↗</span></span></button>
       </div>
       <div class="research-profile-grid"><article><span class="eyebrow">RESEARCH INTERESTS</span><h3>From models to better processes.</h3><p>Sustainable energy systems, CO₂ capture and utilisation, and process systems engineering. Current focus lies in surrogate-based optimisation (SBO), digitalisation strategies, and multi-objective optimisation of complex, multi-physics renewable energy processes. Methodologies integrate first-principles modelling, data-driven techniques, and techno-economic analysis to enable the design of safe, economically viable, and environmentally sustainable chemical systems.</p></article><article><span class="eyebrow">RESEARCH COLLABORATIONS</span><h3>Connecting the scales.</h3><p>Our recent focus has been on collaborating with PSE to develop and refine dynamic CO₂ electrolyser models using gPROMS, with the aim of scaling them up to industrial production levels. In parallel, we are working on constructing a multiscale green methanol production model that integrates the electrolyser as a core component.</p></article></div>
-      <div class="process-panel"><div class="process-heading"><div><span class="eyebrow">PROCESS EXPLORER</span><h3>Follow the carbon.</h3></div><div class="segmented-control route-switch" role="group" aria-label="Choose a methanol pathway"><button data-route="two" class="is-active" aria-pressed="true">Two-step</button><button data-route="three" aria-pressed="false">Three-step</button><button data-route="conventional" aria-pressed="false">Benchmark</button></div></div><div class="route-body"><div class="route-graphic"><svg id="route-svg" viewBox="0 0 980 240" role="group" aria-label="Conceptual methanol pathway; select a process unit to read more"></svg></div><div class="route-detail" aria-live="polite"><span class="route-detail-number" id="route-detail-number">01</span><div><h4 id="route-detail-title">CO₂ supply</h4><p id="route-detail-text"></p></div><span class="route-action micro">SELECT A PROCESS UNIT ↑</span></div></div><p class="figure-note" id="route-note"></p></div>
+      <figure class="process-panel review-pathways" id="process-explorer" aria-labelledby="pathways-title pathways-reference">
+        <div class="process-heading"><div><span class="eyebrow">PROCESS EXPLORER / REVIEW FIGURE</span><h3 id="pathways-title">Follow the carbon.</h3></div><button type="button" id="route-motion-toggle" class="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
+        <div class="segmented-control route-switch" role="group" aria-label="Highlight a methanol pathway from the review figure"><button data-route="direct" aria-pressed="false">(a) Direct electrochemical</button><button data-route="two" class="is-active" aria-pressed="true">(b) Two-step</button><button data-route="hydrogenation" aria-pressed="false">(c) CO₂ hydrogenation</button><button data-route="conventional" aria-pressed="false">(d) Benchmark</button></div>
+        <p class="route-instructions">Choose a pathway to follow its animated flow. Hover, focus or select a process unit to read its explanation.</p>
+        <div class="route-body">
+          <div class="route-graphic" tabindex="0" role="group" aria-label="Original review process flow diagram showing routes a to d; scroll horizontally on small screens">
+            <div class="route-paper-map" data-motion="playing">
+              <img src="assets/methanol-pathways-review.png" alt="Original review process flow diagram: (a) carbon capture, CO₂ electrolysis, separation and distillation; (b) carbon capture and CO₂ electrolysis followed by methanol production with electrolytic hydrogen, separation and distillation; (c) captured CO₂ and electrolytic hydrogen feeding methanol production, separation and distillation; (d) fossil fuel and steam reforming followed by methanol production, separation and distillation. All routes lead to methanol product." width="2526" height="1785" loading="lazy">
+              <svg class="route-paper-animation" viewBox="0 0 1263 892.5" aria-hidden="true" focusable="false"></svg>
+              <div class="route-paper-hotspots" role="group" aria-label="Process units in the selected pathway"></div>
+            </div>
+          </div>
+          <div class="route-selected-summary" role="status" aria-live="polite" aria-atomic="true"><h4 id="route-selected-title">(b) Two-step electrochemical route</h4><p id="route-note">CO₂ electrolysis is followed by methanol production, separation and distillation. Water electrolysis and hydrogen storage supply the H₂ branch.</p></div>
+          <div class="route-unit-list" role="group" aria-label="Choose a process unit"></div>
+          <div class="route-detail" id="route-detail" aria-live="polite"><span class="route-detail-number" id="route-detail-number">01</span><div><h4 id="route-detail-title">Flue-gas carbon source</h4><p id="route-detail-text">Flue gas supplies the captured CO₂ routes shown in the review figure.</p></div></div>
+        </div>
+        <figcaption class="pathways-reference" id="pathways-reference"><p>Ref: <strong>Zhao, Y.</strong>; Wang, S.; Leonzio, G.; Fu, Q.; Wang, Y.; Xuan, J.; Xing, L. From Thermal to Electrochemical CO₂-to-Methanol Conversion: A Comprehensive Review of Process Technologies, Techno-Economics, and Life-Cycle Performance. <em>Carbon Capture Sci. Technol.</em> 2026.<br><a href="https://doi.org/10.1016/j.ccst.2026.100603" target="_blank" rel="noopener noreferrer">DOI: 10.1016/j.ccst.2026.100603 ↗</a></p></figcaption>
+      </figure>
     </section>
     <section class="playground-section" id="playground" aria-labelledby="playground-title"><div class="wrap section"><div class="section-heading"><div><div class="eyebrow section-index">02 / INTERACTIVE PLAYGROUND</div><h2 id="playground-title">Good decisions<br>start with <em>trade-offs.</em></h2></div><div class="section-description"><p>No single design wins on everything.<br>Change the priorities. Explore the compromise.</p><span class="demo-badge"><span aria-hidden="true">◌</span> Illustrative data — not research results</span></div></div>
       <div class="lab-shell"><div class="lab-plot"><div class="lab-plot-top"><div><span class="micro">MULTI-OBJECTIVE DESIGN SPACE</span><div class="plot-subheading"><span class="chart-status-dot"></span><span id="design-count">91</span> synthetic non-dominated designs</div></div><div class="plot-view-controls" role="group" aria-label="Plot view"><button data-view="3d" class="is-active" aria-pressed="true">3D</button><button data-view="2d" aria-pressed="false">2D</button><button id="reset-view" aria-label="Reset chart view" title="Reset chart view">↺</button></div></div><div class="pareto-canvas-container"><canvas id="pareto-canvas" tabindex="0" aria-label="Illustrative multi-objective design space. Drag or use arrow keys to rotate. Click a design to inspect it. A full data table is available below."></canvas><div class="chart-tooltip" id="chart-tooltip" role="status" hidden></div><span class="plot-watermark" aria-hidden="true">ILLUSTRATIVE DATA</span></div><div class="plot-bottom"><span><i class="legend-dot"></i> Example design <i class="legend-dot selected"></i> TOPSIS compromise</span><span class="plot-interaction-label" id="plot-interaction-label">DRAG TO ROTATE · CLICK TO INSPECT</span></div></div>

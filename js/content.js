@@ -243,91 +243,351 @@ window.PORTFOLIO = {
     }
   ],
   "routes": {
-    "two": {
-      "label": "Two-step pathway",
-      "note": "A conceptual pathway, not a process flow diagram or mass balance.",
-      "feed": "Captured CO₂",
-      "auxiliary": "Renewable H₂ · water electrolysis",
-      "product": "CH₃OH",
+    "direct": {
+      "label": "(a) Direct electrochemical route",
+      "note": "Captured CO₂ passes through the CO₂ electrolyser, separation units and distillation. The figure shows no separate methanol-production unit in this route.",
       "nodes": [
         {
-          "name": "CO₂ supply",
-          "sub": "Carbon source",
-          "text": "Captured carbon dioxide enters the conceptual system. Source, purity and upstream capture burdens matter to a full assessment."
+          "name": "Flue-gas carbon source",
+          "text": "Flue gas supplies the captured CO₂ routes shown in the review figure.",
+          "rect": [
+            177,
+            329,
+            78,
+            111
+          ]
         },
         {
-          "name": "Conditioning",
-          "sub": "Prepare the feed",
-          "text": "The carbon feed is conditioned for downstream synthesis. A detailed model would resolve purification, compression and their utility requirements."
+          "name": "Carbon capture",
+          "text": "CO₂ is captured from the flue-gas source before entering the electrochemical route.",
+          "rect": [
+            377,
+            80,
+            77,
+            121
+          ]
         },
         {
-          "name": "Hydrogenation",
-          "sub": "CO₂ + renewable H₂",
-          "text": "Carbon dioxide and hydrogen are converted into methanol and water. Renewable hydrogen is supplied by water electrolysis; detailed reaction and recycle behaviour are not represented here."
+          "name": "CO₂ electrolyser",
+          "text": "The direct electrochemical route converts CO₂ in the electrolyser before product separation and distillation.",
+          "rect": [
+            519,
+            81,
+            96,
+            122
+          ]
         },
         {
-          "name": "Separation",
-          "sub": "Recover methanol",
-          "text": "The synthesis products are separated to recover methanol. Purity, recovery and heat integration are important system-level design choices."
+          "name": "Separation units",
+          "text": "Separation units recover the desired stream from the conversion products before final distillation.",
+          "rect": [
+            672,
+            80,
+            100,
+            124
+          ]
+        },
+        {
+          "name": "Distillation column",
+          "text": "The distillation column is the final purification unit shown before the methanol product.",
+          "rect": [
+            825,
+            80,
+            91,
+            124
+          ]
+        },
+        {
+          "name": "Methanol product",
+          "text": "The routes converge on a methanol product after the conversion and purification units shown in the figure.",
+          "rect": [
+            1016,
+            344,
+            76,
+            115
+          ]
         }
+      ],
+      "flows": [
+        "M215 325C218 237 282 140 366 121",
+        "M469 115L504 115",
+        "M622 115L657 115",
+        "M782 115L818 115",
+        "M907 116C978 121 1018 211 1050 326"
       ]
     },
-    "three": {
-      "label": "Three-step pathway",
-      "note": "A conceptual pathway, not a process flow diagram or mass balance.",
-      "feed": "Captured CO₂",
-      "auxiliary": "Renewable H₂ · water electrolysis",
-      "product": "CH₃OH",
+    "two": {
+      "label": "(b) Two-step electrochemical route",
+      "note": "CO₂ electrolysis is followed by methanol production, separation and distillation. Water electrolysis and hydrogen storage supply the H₂ branch.",
       "nodes": [
         {
-          "name": "CO₂ supply",
-          "sub": "Carbon source",
-          "text": "Captured carbon dioxide provides the carbon feed. Its origin and preparation remain part of the overall system boundary."
+          "name": "Flue-gas carbon source",
+          "text": "Flue gas supplies the captured CO₂ routes shown in the review figure.",
+          "rect": [
+            177,
+            329,
+            78,
+            111
+          ]
         },
         {
-          "name": "CO₂ electrolysis",
-          "sub": "CO-rich feed",
-          "text": "Electrochemical CO₂ reduction produces a CO-rich stream. The realised product mixture and system performance depend on electrolyser operation."
+          "name": "Carbon capture",
+          "text": "Captured CO₂ supplies the first conversion unit in the two-step electrochemical route.",
+          "rect": [
+            294,
+            234,
+            79,
+            118
+          ]
         },
         {
-          "name": "Methanol synthesis",
-          "sub": "CO / CO₂ + H₂",
-          "text": "The carbon-containing stream is combined with hydrogen for methanol synthesis. Feed composition, operating conditions and recycle design must be resolved in a full model."
+          "name": "CO₂ electrolyser",
+          "text": "CO₂ electrolysis supplies a carbon-containing intermediate to the separate methanol-production unit.",
+          "rect": [
+            438,
+            235,
+            88,
+            120
+          ]
         },
         {
-          "name": "Separation",
-          "sub": "Recover methanol",
-          "text": "Downstream separation recovers methanol. The pathway adds electrochemical conversion before synthesis, creating additional integration choices."
+          "name": "Water electrolyser",
+          "text": "Water electrolysis supplies the hydrogen branch shown in this route.",
+          "rect": [
+            379,
+            365,
+            80,
+            108
+          ]
+        },
+        {
+          "name": "Hydrogen storage",
+          "text": "Hydrogen storage links water electrolysis to the downstream methanol-production feed.",
+          "rect": [
+            515,
+            363,
+            85,
+            108
+          ]
+        },
+        {
+          "name": "Methanol production",
+          "text": "The carbon-containing stream from CO₂ electrolysis is combined with the hydrogen supply in the methanol-production unit.",
+          "rect": [
+            582,
+            230,
+            119,
+            128
+          ]
+        },
+        {
+          "name": "Separation units",
+          "text": "Separation units recover the desired stream from the conversion products before final distillation.",
+          "rect": [
+            742,
+            226,
+            99,
+            133
+          ]
+        },
+        {
+          "name": "Distillation column",
+          "text": "The distillation column is the final purification unit shown before the methanol product.",
+          "rect": [
+            887,
+            226,
+            93,
+            133
+          ]
+        },
+        {
+          "name": "Methanol product",
+          "text": "The routes converge on a methanol product after the conversion and purification units shown in the figure.",
+          "rect": [
+            1016,
+            344,
+            76,
+            115
+          ]
         }
+      ],
+      "flows": [
+        "M216 326C220 292 252 271 286 270",
+        "M391 264L426 264",
+        "M535 264L570 264",
+        "M695 268L730 268",
+        "M847 268L882 268",
+        "M976 260C1017 263 1037 296 1050 326",
+        "M472 393L507 393",
+        "M556 346L556 314"
+      ]
+    },
+    "hydrogenation": {
+      "label": "(c) CO₂ hydrogenation route",
+      "note": "Captured CO₂ and hydrogen from water electrolysis feed methanol production directly, followed by separation and distillation.",
+      "nodes": [
+        {
+          "name": "Flue-gas carbon source",
+          "text": "Flue gas supplies the captured CO₂ routes shown in the review figure.",
+          "rect": [
+            177,
+            329,
+            78,
+            111
+          ]
+        },
+        {
+          "name": "Carbon capture",
+          "text": "Captured CO₂ is delivered to methanol production in this route.",
+          "rect": [
+            372,
+            514,
+            80,
+            119
+          ]
+        },
+        {
+          "name": "Water electrolyser",
+          "text": "Water electrolysis supplies the hydrogen branch shown in this route.",
+          "rect": [
+            300,
+            644,
+            91,
+            109
+          ]
+        },
+        {
+          "name": "Hydrogen storage",
+          "text": "Hydrogen storage links water electrolysis to the downstream methanol-production feed.",
+          "rect": [
+            443,
+            647,
+            87,
+            111
+          ]
+        },
+        {
+          "name": "Methanol production",
+          "text": "Captured CO₂ and the stored hydrogen supply feed the methanol-production unit shown in the figure.",
+          "rect": [
+            517,
+            513,
+            106,
+            126
+          ]
+        },
+        {
+          "name": "Separation units",
+          "text": "Separation units recover the desired stream from the conversion products before final distillation.",
+          "rect": [
+            681,
+            509,
+            98,
+            128
+          ]
+        },
+        {
+          "name": "Distillation column",
+          "text": "The distillation column is the final purification unit shown before the methanol product.",
+          "rect": [
+            831,
+            509,
+            87,
+            130
+          ]
+        },
+        {
+          "name": "Methanol product",
+          "text": "The routes converge on a methanol product after the conversion and purification units shown in the figure.",
+          "rect": [
+            1016,
+            344,
+            76,
+            115
+          ]
+        }
+      ],
+      "flows": [
+        "M225 429C231 483 291 541 365 546",
+        "M462 553L499 553",
+        "M632 553L668 553",
+        "M789 553L824 553",
+        "M910 542C975 541 1024 518 1048 475",
+        "M394 678L429 678",
+        "M485 626L485 597"
       ]
     },
     "conventional": {
-      "label": "Conventional benchmark",
-      "note": "A conceptual natural-gas benchmark; individual plants use different configurations.",
-      "feed": "Natural gas",
-      "auxiliary": "Steam · reforming feed",
-      "product": "CH₃OH",
+      "label": "(d) Fossil-fuel benchmark",
+      "note": "Fossil fuel passes through a steam reformer before methanol production, separation and distillation.",
       "nodes": [
         {
-          "name": "Natural gas",
-          "sub": "Fossil feedstock",
-          "text": "Natural gas supplies carbon and hydrogen to this conceptual conventional benchmark. It is not a captured-carbon pathway."
+          "name": "Fossil fuel",
+          "text": "Fossil fuel is the feedstock shown for the benchmark pathway.",
+          "rect": [
+            173,
+            776,
+            84,
+            104
+          ]
         },
         {
-          "name": "Reforming",
-          "sub": "Generate syngas",
-          "text": "Reforming generates synthesis gas. The detailed reformer configuration, heat supply and gas composition are outside this illustrative diagram."
+          "name": "Steam reformer",
+          "text": "The steam reformer prepares the feed for the benchmark methanol-production unit.",
+          "rect": [
+            365,
+            771,
+            86,
+            109
+          ]
         },
         {
-          "name": "Methanol synthesis",
-          "sub": "Syngas conversion",
-          "text": "Synthesis gas is converted into methanol. Reaction, recycle and heat integration determine the performance of the full process."
+          "name": "Methanol production",
+          "text": "The reformer output feeds methanol production, followed by product purification.",
+          "rect": [
+            524,
+            770,
+            110,
+            112
+          ]
         },
         {
-          "name": "Separation",
-          "sub": "Recover methanol",
-          "text": "Methanol is recovered from the synthesis products. A fair comparison requires consistent functional units and system boundaries."
+          "name": "Separation units",
+          "text": "Separation units recover the desired stream from the conversion products before final distillation.",
+          "rect": [
+            691,
+            769,
+            100,
+            112
+          ]
+        },
+        {
+          "name": "Distillation column",
+          "text": "The distillation column is the final purification unit shown before the methanol product.",
+          "rect": [
+            839,
+            769,
+            90,
+            112
+          ]
+        },
+        {
+          "name": "Methanol product",
+          "text": "The routes converge on a methanol product after the conversion and purification units shown in the figure.",
+          "rect": [
+            1016,
+            344,
+            76,
+            115
+          ]
         }
+      ],
+      "flows": [
+        "M259 812L355 812",
+        "M474 810L511 810",
+        "M642 810L677 810",
+        "M797 810L833 810",
+        "M920 798C990 784 1027 638 1048 478"
       ]
     }
   },

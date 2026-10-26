@@ -24,7 +24,7 @@
       description: 'e-Methanol is stored between production and use. Storage buffers changes in renewable-linked production schedules and downstream demand.' },
     { id: 'ai', name: 'AI control system', short: 'AI control', x: 49, y: 49, w: 16, h: 25,
       description: 'AI-assisted monitoring and optimisation coordinate electricity supply, carbon capture, hydrogen production, storage and end-use demand across the system.' },
-    { id: 'civil', name: 'Civil applications', short: 'End-use demand', x: 79, y: 32, w: 20, h: 22,
+    { id: 'civil', name: 'Civil applications', short: 'End-use demand', x: 79, y: 32, w: 19, h: 22,
       description: 'Buildings and communities represent downstream demand for electricity and energy services. Their demand connects the integrated supply network with end users.' },
     { id: 'fuel', name: 'Fuel cell station', short: 'Fuel cells', x: 69, y: 74, w: 27, h: 24,
       description: 'Fuel cells convert stored hydrogen into electricity. This pathway can provide flexible power when renewable generation and electricity demand do not coincide.' }
