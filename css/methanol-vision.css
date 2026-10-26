@@ -68,3 +68,19 @@
 }
 @media(prefers-reduced-motion:reduce){.vision-animation *{animation:none!important}.vision-hotspot{transition:none}}
 @media print{.vision-toolbar,.vision-mobile-hint,.vision-hotspots,.vision-tooltip,.vision-modules{display:none}.vision-map{min-width:0}.vision-animation *{animation:none}.vision-figure{break-inside:avoid}.vision-detail{min-height:0}}
+
+/* Physical motion in the original illustration: clockwise blades and ocean swell. */
+.vision-molecule-link{font-size:14px;white-space:nowrap;color:var(--accent);margin-left:auto;text-decoration:underline;text-underline-offset:4px}
+.vision-turbine-rotor{transform-box:view-box;transform-origin:50% 50%;animation:vision-turbine-clockwise var(--rotor-speed,10s) linear infinite;animation-delay:var(--rotor-delay,0s)}
+.vision-ocean-swell{animation:vision-ocean-swell 6.4s ease-in-out infinite;transform-origin:left center}
+.vision-ocean-texture{opacity:.94}
+.vision-wavelet{stroke-dasharray:14 44;animation:vision-wave-crest 7.2s linear infinite;opacity:.55}
+.vision-wavelet.second{animation-delay:-2.4s;animation-duration:8.4s;opacity:.4}
+.vision-wavelet.third{animation-delay:-4.8s;animation-duration:9.2s;opacity:.48}
+.vision-coastal-surf{stroke-dasharray:25 19 9 37;animation:vision-coastal-surf 8s linear infinite;opacity:.64}
+@keyframes vision-turbine-clockwise{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes vision-ocean-swell{0%,100%{transform:translate(0,-1.5px)}30%{transform:translate(-1.8px,1px)}65%{transform:translate(.9px,3px)}}
+@keyframes vision-wave-crest{from{stroke-dashoffset:0;transform:translateY(0)}to{stroke-dashoffset:-174;transform:translateY(3px)}}
+@keyframes vision-coastal-surf{0%{stroke-dashoffset:0;opacity:.42}50%{opacity:.79}100%{stroke-dashoffset:-180;opacity:.42}}
+@media(max-width:760px){.vision-toolbar{flex-wrap:wrap;gap:13px 15px}.vision-toolbar p{flex:1;min-width:170px}.vision-molecule-link{font-size:13px;order:3;width:100%;margin:0}.vision-motion-toggle{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){.vision-turbine-rotor,.vision-ocean-swell,.vision-wavelet,.vision-coastal-surf{animation:none!important}}

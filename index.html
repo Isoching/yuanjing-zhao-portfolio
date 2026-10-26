@@ -40,13 +40,48 @@
     <section class="section wrap methanol-vision" id="methanol-vision" aria-labelledby="methanol-vision-title">
       <div class="section-heading vision-heading"><div><div class="eyebrow section-index">SYSTEMS VISION / INTERACTIVE</div><h2 id="methanol-vision-title">A systems-level vision<br><em>for green methanol.</em></h2></div><p class="section-description">An AI-enabled, renewable-driven and carbon-capture-integrated green methanol economy.</p></div>
       <figure class="vision-figure" aria-labelledby="methanol-vision-title vision-caption">
-        <div class="vision-toolbar"><p>Explore 13 connected modules.<br>Hover for a short explanation. Click to select.</p><button type="button" class="vision-motion-toggle" id="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
+        <div class="vision-toolbar"><p>Explore 13 connected modules.<br>Hover for a short explanation. Click to select.</p><a class="vision-molecule-link" href="#home">Methanol molecule ↑</a><button type="button" class="vision-motion-toggle" id="vision-motion-toggle" aria-pressed="false">Pause motion</button></div>
         <p class="vision-mobile-hint">Swipe across the diagram, or choose a module below to read its explanation.</p>
         <div class="vision-stage">
           <div class="vision-map-scroll" tabindex="0" role="group" aria-label="Interactive green methanol systems figure; scroll horizontally on small screens">
             <div class="vision-map" data-motion="playing">
               <img src="assets/green-methanol-vision.png" alt="A renewable-driven green methanol system connecting wind and solar power, carbon capture and storage, electrolysis, hydrogen storage, methanol production, fuel cells, end-use demand and AI control." width="2520" height="1737" loading="lazy">
               <svg class="vision-animation" viewBox="0 0 1000 689.286" aria-hidden="true" focusable="false">
+                <defs>
+                  <filter id="vision-wind-feather"><feGaussianBlur stdDeviation="1.4"/></filter>
+                  <mask id="vision-wind-cleanup" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="210"><rect width="1000" height="210" fill="black"/><g fill="white" filter="url(#vision-wind-feather)"><circle cx="350" cy="140" r="54"/><circle cx="444" cy="118" r="54"/><circle cx="515" cy="105" r="52"/><circle cx="593" cy="79" r="54"/><circle cx="669" cy="47" r="54"/></g><rect y="171" width="1000" height="39" fill="black"/></mask>
+                  <mask id="vision-ocean-mask" maskUnits="userSpaceOnUse" x="0" y="205" width="210" height="485">
+                    <path d="M0 226C50 218 112 219 163 244C181 253 172 265 155 278C144 291 149 307 161 321C167 333 158 344 174 355C190 369 178 385 166 399C161 414 155 432 135 441C114 448 103 447 106 464C113 484 94 499 93 516C91 531 108 547 105 570C106 590 94 605 86 622C75 641 41 650 0 677Z" fill="white"/>
+                    <rect x="129" y="270" width="94" height="38" fill="black"/>
+                    <rect x="135" y="317" width="140" height="40" fill="black"/>
+                    <rect x="77" y="591" width="174" height="99" fill="black"/>
+                  </mask>
+                  <filter id="vision-ocean-ripple" filterUnits="userSpaceOnUse" x="-5" y="205" width="215" height="490" color-interpolation-filters="sRGB">
+                    <feTurbulence type="fractalNoise" baseFrequency=".024 .075" numOctaves="2" seed="11" result="ripples"/>
+                    <feDisplacementMap in="SourceGraphic" in2="ripples" scale="3.1" xChannelSelector="R" yChannelSelector="G"/>
+                  </filter>
+                  <linearGradient id="vision-blade-metal" x1="0" x2="1"><stop stop-color="#c1d0cb"/><stop offset=".45" stop-color="#f5f6e9"/><stop offset="1" stop-color="#8eaaa8"/></linearGradient>
+                  <radialGradient id="vision-hub-metal" cx=".3" cy=".25"><stop stop-color="#ffffef"/><stop offset="1" stop-color="#9cb1ae"/></radialGradient>
+                  <path id="vision-turbine-blade" d="M48.3 50.5C46 40 44.5 18 48.7 3C51.7 17 53.2 36 51.6 48.8L50 52Z" fill="url(#vision-blade-metal)" stroke="#819c9a" stroke-width=".45"/>
+                  <clipPath id="vision-wind-label"><rect x="705" y="21" width="111" height="35" rx="3"/></clipPath>
+                </defs>
+                <g mask="url(#vision-ocean-mask)">
+                  <g class="vision-ocean-swell"><image class="vision-ocean-texture" href="assets/green-methanol-vision.png" width="1000" height="689.286" preserveAspectRatio="none" filter="url(#vision-ocean-ripple)"/></g>
+                  <g class="vision-offshore-foam" fill="none" stroke="#d6ffff" stroke-width="1.3" stroke-linecap="round">
+                    <path class="vision-wavelet" d="M12 254Q35 246 57 254T101 254T143 254"/>
+                    <path class="vision-wavelet second" d="M-8 293Q16 286 40 293T86 293T131 293"/>
+                    <path class="vision-wavelet third" d="M15 386Q37 377 59 386T102 386T146 386"/>
+                    <path class="vision-wavelet" d="M-13 432Q10 424 33 432T77 432T119 432"/>
+                    <path class="vision-wavelet second" d="M-4 494Q17 487 38 494T81 494"/>
+                    <path class="vision-wavelet third" d="M-5 562Q17 555 39 562T82 562"/>
+                    <path class="vision-wavelet" d="M-7 623Q13 616 33 623T72 623"/>
+                  </g>
+                  <path class="vision-coastal-surf" d="M-5 235C51 226 113 233 155 250C161 262 145 271 144 283M154 360C179 370 165 391 157 407C149 425 121 435 101 439M96 482C83 502 82 518 92 539C105 561 92 591 80 615C62 642 27 647-3 660" fill="none" stroke="#edffff" stroke-width="2.7" stroke-linecap="round"/>
+                </g>
+                <image class="vision-wind-clean-plate" href="assets/green-methanol-wind-clean.png" width="1000" height="689.286" preserveAspectRatio="none" mask="url(#vision-wind-cleanup)"/>
+                <g class="vision-wind-farm"><svg class="vision-turbine-plane" x="319" y="107" width="66" height="66" viewBox="0 0 100 100" overflow="visible" data-turbine="coastal"><g class="vision-turbine-rotor" style="--rotor-speed:9.5s;--rotor-delay:-1.2s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="406" y="83" width="70" height="70" viewBox="0 0 100 100" overflow="visible" data-turbine="midwest"><g class="vision-turbine-rotor" style="--rotor-speed:10.8s;--rotor-delay:-4.1s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="481" y="73" width="62" height="62" viewBox="0 0 100 100" overflow="visible" data-turbine="middle"><g class="vision-turbine-rotor" style="--rotor-speed:8.8s;--rotor-delay:-2.5s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="554" y="43" width="72" height="72" viewBox="0 0 100 100" overflow="visible" data-turbine="mideast"><g class="vision-turbine-rotor" style="--rotor-speed:11.4s;--rotor-delay:-6.3s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg><svg class="vision-turbine-plane" x="630" y="13" width="72" height="72" viewBox="0 0 100 100" overflow="visible" data-turbine="summit"><g class="vision-turbine-rotor" style="--rotor-speed:9.8s;--rotor-delay:-3.7s"><use href="#vision-turbine-blade" transform="rotate(0 50 50)"/><use href="#vision-turbine-blade" transform="rotate(120 50 50)"/><use href="#vision-turbine-blade" transform="rotate(240 50 50)"/></g><circle cx="50" cy="50" r="4.2" fill="url(#vision-hub-metal)" stroke="#8a9c9a" stroke-width=".65"/></svg></g>
+                <image href="assets/green-methanol-vision.png" width="1000" height="689.286" preserveAspectRatio="none" clip-path="url(#vision-wind-label)"/>
+
                 <path class="vision-flow power" d="M660 88C638 143 616 185 585 224"/>
                 <path class="vision-flow power" d="M805 409C744 401 682 399 621 415"/>
                 <path class="vision-flow power" d="M520 460C439 481 356 529 281 586"/>
@@ -55,9 +90,9 @@
                 <path class="vision-flow carbon" d="M610 242C644 243 674 244 701 250"/>
                 <path class="vision-flow hydrogen" d="M257 589C326 606 395 628 466 637"/>
                 <path class="vision-flow hydrogen" d="M596 617C655 604 704 589 745 580"/>
-                <circle class="vision-energy-pulse" cx="350" cy="140" r="10"/>
-                <circle class="vision-energy-pulse second" cx="514" cy="102" r="10"/>
-                <circle class="vision-energy-pulse third" cx="668" cy="45" r="10"/>
+                
+                
+                
                 <circle class="vision-ai-ring" cx="554" cy="416" r="36"/>
                 <polygon class="vision-solar-glint" points="785,371 919,417 875,447 738,403"/>
               </svg>
