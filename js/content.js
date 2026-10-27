@@ -314,14 +314,7 @@ window.PORTFOLIO = {
         "M782 115L818 115",
         "M907 116C978 121 1018 211 1050 326"
       ],
-      "focusRegions": [
-        [
-          332,
-          60,
-          614,
-          151
-        ]
-      ]
+      "viewCenterX": 639.0
     },
     "two": {
       "label": "two-step route",
@@ -427,20 +420,7 @@ window.PORTFOLIO = {
         "M472 393L507 393",
         "M556 346L556 314"
       ],
-      "focusRegions": [
-        [
-          280,
-          213,
-          707,
-          152
-        ],
-        [
-          372,
-          350,
-          230,
-          130
-        ]
-      ]
+      "viewCenterX": 633.5
     },
     "hydrogenation": {
       "label": "three-step route",
@@ -535,20 +515,7 @@ window.PORTFOLIO = {
         "M394 678L429 678",
         "M485 626L485 597"
       ],
-      "focusRegions": [
-        [
-          349,
-          492,
-          582,
-          151
-        ],
-        [
-          291,
-          632,
-          251,
-          132
-        ]
-      ]
+      "viewCenterX": 640.0
     },
     "conventional": {
       "label": "Benchmark",
@@ -621,14 +588,7 @@ window.PORTFOLIO = {
         "M797 810L833 810",
         "M920 798C990 784 1027 638 1048 478"
       ],
-      "focusRegions": [
-        [
-          170,
-          752,
-          766,
-          135
-        ]
-      ]
+      "viewCenterX": 553.0
     }
   },
   "profileSource": "https://www.surrey.ac.uk/people/yuanjing-jason-zhao",

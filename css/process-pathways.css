@@ -1,4 +1,4 @@
-/* The original review image is preserved; SVG masks reveal the selected route. */
+/* All routes stay in their original colour; only selected flow markers animate. */
 .review-pathways{margin-inline:0;padding:28px 28px 24px}
 .review-pathways .process-heading{align-items:center}
 .review-pathways .process-heading .eyebrow{font-size:11px}
@@ -8,12 +8,9 @@
 .review-pathways .route-body{position:relative;margin-top:22px}
 .review-pathways .route-graphic{overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--line);border-radius:4px;background:#fff;margin:0;scrollbar-width:thin;scrollbar-color:var(--accent) var(--sage)}
 .route-paper-map{position:relative;min-width:1050px;aspect-ratio:2526/1785;background:#fff;isolation:isolate}
-.route-paper-map>img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:filter .25s,opacity .25s}
-.route-paper-map.has-focused-route>img{filter:grayscale(.95);opacity:.62}
+.route-paper-map>img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .route-paper-animation,.route-paper-hotspots{position:absolute;inset:0;width:100%;height:100%}
 .route-paper-animation{pointer-events:none}
-.route-focus-image,.route-focus-region{opacity:0;transition:opacity .25s}
-.has-focused-route .route-focus-image,.route-focus-region.is-active{opacity:1}
 .route-paper-flow{fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:2 12;animation:review-pathway-flow 3.2s linear infinite;filter:drop-shadow(0 0 1.4px #186078)}
 .route-flow-group{opacity:0;transition:opacity .25s}
 .route-flow-group.is-active{opacity:1}
@@ -31,5 +28,5 @@
   .route-instructions{font-size:14px}.review-pathways .route-body{margin-top:17px}
   .pathways-reference{font-size:14px}
 }
-@media(prefers-reduced-motion:reduce){.route-paper-flow{animation:none!important}.route-flow-group,.route-paper-unit,.route-focus-image,.route-focus-region,.route-paper-map>img{transition:none}}
-@media print{.review-pathways{display:block!important}.review-pathways .route-switch,#route-motion-toggle,.route-instructions,.route-paper-hotspots,.route-paper-tooltip{display:none}.route-paper-map{min-width:0}.route-paper-map>img{filter:none!important;opacity:1!important}.route-focus-image,.route-paper-animation{display:none}.review-pathways{break-inside:avoid}}
+@media(prefers-reduced-motion:reduce){.route-paper-flow{animation:none!important}.route-flow-group,.route-paper-unit{transition:none}}
+@media print{.review-pathways{display:block!important}.review-pathways .route-switch,#route-motion-toggle,.route-instructions,.route-paper-hotspots,.route-paper-tooltip{display:none}.route-paper-map{min-width:0}.route-paper-animation{display:none}.review-pathways{break-inside:avoid}}

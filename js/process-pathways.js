@@ -1,4 +1,4 @@
-/* Focus one original review route while retaining the full comparison figure. */
+/* Keep every review route in full colour; animate only the selected material flow. */
 (() => {
   'use strict';
   const root = document.getElementById('process-explorer');
@@ -23,22 +23,9 @@
     return element;
   };
 
-  const defs = makeSVG('defs');
-  const feather = makeSVG('filter', {id: 'route-focus-feather', x: '-10%', y: '-10%', width: '120%', height: '120%'});
-  feather.append(makeSVG('feGaussianBlur', {stdDeviation: '3'}));
-  defs.append(feather);
-  const focusMask = makeSVG('mask', {id: 'route-focus-mask', maskUnits: 'userSpaceOnUse', x: '0', y: '0', width: '1263', height: '892.5'});
-  focusMask.append(makeSVG('rect', {width: '1263', height: '892.5', fill: 'black'}));
-  defs.append(focusMask);
-  overlay.append(defs);
-  const focusImage = makeSVG('image', {href: 'assets/methanol-pathways-review.png', width: '1263', height: '892.5', mask: 'url(#route-focus-mask)', class: 'route-focus-image'});
-  overlay.append(focusImage);
   const flowLayer = makeSVG('g', {class: 'route-flow-layer'});
   overlay.append(flowLayer);
   Object.entries(routes).forEach(([key, route]) => {
-    const region = makeSVG('g', {class: 'route-focus-region', 'data-route-focus': key, fill: 'white', filter: 'url(#route-focus-feather)'});
-    route.focusRegions.forEach(([x, y, width, height]) => region.append(makeSVG('rect', {x, y, width, height, rx: '8'})));
-    focusMask.append(region);
     const group = makeSVG('g', {class: 'route-flow-group', 'data-route-flow': key});
     route.flows.forEach((d, index) => {
       const path = makeSVG('path', {class: 'route-paper-flow', d});
@@ -125,23 +112,25 @@
     hideTooltip();
     dismissed = false;
     map.dataset.route = selectedRoute || 'all';
-    map.classList.toggle('has-focused-route', !!selectedRoute);
-    status.textContent = selectedRoute ? `${routes[selectedRoute].label} is highlighted; the other three routes are dimmed.` : 'All four routes are shown.';
+    updateStatus();
     root.querySelectorAll('.route-switch [data-route]').forEach(button => {
       const active = button.dataset.route === selectedRoute;
       button.classList.toggle('is-active', active);
       button.setAttribute('aria-pressed', String(active));
     });
-    focusMask.querySelectorAll('[data-route-focus]').forEach(group => group.classList.toggle('is-active', group.dataset.routeFocus === selectedRoute));
-    flowLayer.querySelectorAll('[data-route-flow]').forEach(group => group.classList.toggle('is-active', !selectedRoute || group.dataset.routeFlow === selectedRoute));
-    if (selectedRoute) flowLayer.setAttribute('mask', 'url(#route-focus-mask)');
-    else flowLayer.removeAttribute('mask');
+    flowLayer.querySelectorAll('[data-route-flow]').forEach(group => group.classList.toggle('is-active', group.dataset.routeFlow === selectedRoute));
     renderHotspots();
     if (pan && scroll.clientWidth < map.clientWidth) {
-      const region = selectedRoute && routes[selectedRoute].focusRegions[0];
-      const left = region ? map.clientWidth * (region[0] + region[2] / 2) / 1263 - scroll.clientWidth / 2 : 0;
+      const center = selectedRoute && routes[selectedRoute].viewCenterX;
+      const left = center ? map.clientWidth * center / 1263 - scroll.clientWidth / 2 : 0;
       scroll.scrollTo({left, behavior: reduced.matches ? 'auto' : 'smooth'});
     }
+  }
+  function updateStatus() {
+    const stopped = paused || reduced.matches;
+    status.textContent = selectedRoute
+      ? `${routes[selectedRoute].label} selected; its material flow is ${stopped ? "paused" : "animated"}. All four routes remain in full colour.`
+      : "All four routes are shown in full colour. Select a route to animate its material flow.";
   }
   function updateMotion() {
     const stopped = paused || reduced.matches;
@@ -149,6 +138,7 @@
     toggle.textContent = reduced.matches ? 'Reduced motion' : stopped ? 'Play motion' : 'Pause motion';
     toggle.setAttribute('aria-pressed', String(stopped));
     toggle.disabled = reduced.matches;
+    updateStatus();
   }
   function handleViewportChange() {
     const focused = hotspots.querySelector(':focus');
